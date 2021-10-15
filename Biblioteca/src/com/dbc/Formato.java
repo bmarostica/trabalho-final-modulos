@@ -1,4 +1,4 @@
 package com.dbc;
 
-public class Formato {
+public enum Formato {
 }
