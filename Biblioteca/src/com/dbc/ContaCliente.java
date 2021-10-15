@@ -2,7 +2,7 @@ package com.dbc;
 
 import java.util.*;
 
-public abstract class ContaCliente implements PlanosDeAssinatura {
+public abstract class ContaCliente {
     private Integer idCliente;
     private String nome;
     private String telefone;
