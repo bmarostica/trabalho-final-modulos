@@ -8,13 +8,15 @@ public abstract class ContaCliente {
     private String telefone;
     private String email;
     private Livro livro;
+    private StatusCliente status;
 
-    public ContaCliente(Integer idCliente, String nome, String telefone, String email, Livro livro, List<ContaCliente> listaDeContas) {
+    public ContaCliente(Integer idCliente, String nome, String telefone, String email, Livro livro, StatusCliente status, List<ContaCliente> listaDeContas) {
         this.idCliente = idCliente;
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
         this.livro = livro;
+        this.status = status;
         this.listaDeContas = listaDeContas;
     }
 
@@ -96,5 +98,13 @@ public abstract class ContaCliente {
 
     public void setLivro(Livro livro) {
         this.livro = livro;
+    }
+
+    public StatusCliente getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusCliente status) {
+        this.status = status;
     }
 }
