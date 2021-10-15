@@ -1,22 +1,31 @@
 package com.dbc;
 
-public class Livro implements Gerenciamento{
-    @Override
+public class Livro{
+    private Integer id;
+    private String titulo;
+    private String autor;
+    private String editora;
+
+
+
+
+
+
     public void criar() {
 
     }
 
-    @Override
+
     public void buscar() {
 
     }
 
-    @Override
+
     public void alterar() {
 
     }
 
-    @Override
+
     public void deletar() {
 
     }

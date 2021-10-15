@@ -1,22 +1,22 @@
 package com.dbc;
 
-public class ContaCLientePremium extends ContaCliente{
-    @Override
+public class ContaCLientePremium extends ContaCliente implements PlanosDeAssinatura{
+
     public void criar() {
 
     }
 
-    @Override
+
     public void buscar() {
 
     }
 
-    @Override
+
     public void alterar() {
 
     }
 
-    @Override
+
     public void deletar() {
 
     }

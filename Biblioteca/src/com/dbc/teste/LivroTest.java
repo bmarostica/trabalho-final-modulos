@@ -1,4 +1,4 @@
-package com.dbc.Teste;
+package com.dbc.teste;
 
 public class LivroTest {
 }

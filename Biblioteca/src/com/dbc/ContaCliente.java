@@ -1,4 +1,7 @@
 package com.dbc;
 
-public abstract class ContaCliente implements PlanosDeAssinatura, Gerenciamento{
+import java.util.*;
+
+public abstract class ContaCliente{
+
 }
