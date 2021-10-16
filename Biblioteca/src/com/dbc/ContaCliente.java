@@ -10,54 +10,13 @@ public abstract class ContaCliente {
     private Livro livro;
     private StatusCliente status;
 
-    public ContaCliente(Integer idCliente, String nome, String telefone, String email, Livro livro, StatusCliente status, List<ContaCliente> listaDeContas) {
-        this.idCliente = idCliente;
-        this.nome = nome;
-        this.telefone = telefone;
-        this.email = email;
-        this.livro = livro;
-        this.status = status;
-        this.listaDeContas = listaDeContas;
-    }
 
-    private List<ContaCliente> listaDeContas;
-
-    public ContaCliente() {
-        this.listaDeContas = new ArrayList<>();
-    }
-
-    public void adicionarContaCliente(ContaCliente novaConta) {
-        this.listaDeContas.add(novaConta);
-    }
-
-    public void listarContas() {
-        for (int i = 0; i < listaDeContas.size(); i++) {
-            System.out.println("id=" + i + " | " + listaDeContas.get(i));
+    public boolean editarId(int novoId) {
+        if (novoId > 0) {
+            setIdCliente(novoId);
+            return true;
         }
-    }
-
-    public void editarId(Integer idCliente) {
-        this.idCliente = idCliente;
-    }
-
-    public void editarNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void editarTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public void editarEmail(String email) {
-        this.email = email;
-    }
-
-    public void editarLivro(Livro livro) {
-        this.livro = livro;
-    }
-
-    public void removerContaCliente(Integer idCliente) {
-        this.listaDeContas.remove(idCliente.intValue());
+        return false;
     }
 
     public Integer getIdCliente() {
