@@ -5,7 +5,6 @@ import com.dbc.ContaCliente;
 import com.dbc.ContaClienteComum;
 import com.dbc.StatusCliente;
 import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
