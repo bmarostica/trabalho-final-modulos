@@ -1,4 +1,7 @@
 package com.dbc;
+import java.util.ArrayList;
+import java.util.List;
+import java.lang.Override;
 
 public class Funcionario{
     private Integer idFuncionario;
@@ -37,23 +40,47 @@ public class Funcionario{
     public void setEmailFuncionario(String emailFuncionario) {
         this.emailFuncionario = emailFuncionario;
     }
+    @Override
+    public String toString(){
+        return " |Funcionario ID: "+ idFuncionario +
+                " Nome: " + nomeFuncionario +
+                " Telefone: " + telefoneFuncionario +
+                " Email: " + emailFuncionario +
+                " | ";
+    }
 
-    public void criar() {
+    //Daqui pra baixo é CRUD
 
+
+    private List<Funcionario> listaDeFuncionarios;
+
+    public Funcionario(){
+        this.listaDeFuncionarios = new ArrayList<>();
     }
 
 
-    public void buscar() {
-
+    public void criarFuncionario(Funcionario funcionario) {
+        this.listaDeFuncionarios.add(funcionario);
     }
 
 
-    public void alterar() {
-
+    public void buscarFuncionario() {
+        for (int i = 0; i < listaDeFuncionarios.size(); i++) {
+            System.out.println("id=" + i + " | " + listaDeFuncionarios.get(i));
+        }
     }
 
 
-    public void deletar() {
+    public void alterarFuncionario(Integer index, Funcionario funcionario){
+        Funcionario funcionarioProcurado = listaDeFuncionarios.get(index);
+        funcionarioProcurado.setIdFuncionario(funcionario.getIdFuncionario());
+        funcionarioProcurado.setNomeFuncionario(funcionario.getNomeFuncionario());
+        funcionarioProcurado.setTelefoneFuncionario(funcionario.getTelefoneFuncionario());
+        funcionarioProcurado.setEmailFuncionario(funcionario.getEmailFuncionario());
+    }
 
+
+    public void deletarFuncionario(Integer index) {
+        this.listaDeFuncionarios.remove(index.intValue());
     }
 }
