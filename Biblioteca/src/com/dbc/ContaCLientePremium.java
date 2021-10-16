@@ -32,8 +32,6 @@ public class ContaCLientePremium extends ContaCliente implements PlanosDeAssinat
         contaParaEditar.setStatus(conta.getStatus());
     }
 
-
-
     public void cobrarMensalidade(double valor) {
     }
 

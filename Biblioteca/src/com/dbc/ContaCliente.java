@@ -10,10 +10,21 @@ public abstract class ContaCliente {
     private Livro livro;
     private StatusCliente status;
 
-
     public boolean editarId(int novoId) {
         if (novoId > 0) {
             setIdCliente(novoId);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean podeAlugar(StatusCliente status) {
+        return status.equals(StatusCliente.OK);
+    }
+
+    public boolean editarTelefone(ContaCliente conta, String novoTelefone){
+        if (!Objects.equals(novoTelefone, conta.getTelefone())) {
+            conta.setTelefone(novoTelefone);
             return true;
         }
         return false;
@@ -66,4 +77,6 @@ public abstract class ContaCliente {
     public void setStatus(StatusCliente status) {
         this.status = status;
     }
+
+
 }
