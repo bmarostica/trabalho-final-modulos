@@ -1,9 +1,6 @@
 package com.dbc.teste;
 
-import com.dbc.ContaCLientePremium;
-import com.dbc.ContaCliente;
-import com.dbc.ContaClienteComum;
-import com.dbc.StatusCliente;
+import com.dbc.*;
 import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,18 +8,18 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class ContaClienteTest {
-    ContaClienteComum joaoVitor = new ContaClienteComum();
-    ContaClienteComum joaoPedro = new ContaClienteComum();
-    ContaCLientePremium luizFelipe = new ContaCLientePremium();
-    ContaCLientePremium luizGuilherme = new ContaCLientePremium();
+    private ContaClienteComum joaoVitor = new ContaClienteComum();
+    private ContaClienteComum joaoPedro = new ContaClienteComum();
+    private ContaCLientePremium luizFelipe = new ContaCLientePremium();
+    private ContaCLientePremium luizGuilherme = new ContaCLientePremium();
+    private Contas contas = new Contas();
+
 
 
     @Test
     public void editarIdContaClienteDeveriaFuncionarERetornarIdCorreto() {
         joaoVitor.setIdCliente(1);
-
         boolean editar = joaoVitor.editarId(33);
-
         assertTrue(editar);
         assertEquals(joaoVitor.getIdCliente(),33,0);
     }
@@ -30,9 +27,7 @@ public class ContaClienteTest {
     @Test
     public void deveriaPoderAlugarCasoStatusSejaOK() {
         joaoVitor.setStatus(StatusCliente.OK);
-
         boolean verifica = joaoVitor.podeAlugar(joaoVitor.getStatus());
-
         assertTrue(verifica);
     }
 
@@ -46,12 +41,51 @@ public class ContaClienteTest {
     @Test
     public void editarTelefoneDeveriaFuncionarERetornarTelefoneCorreto() {
         luizFelipe.setTelefone("132");
-
         luizFelipe.editarTelefone(luizFelipe,"9990");
-
         assertEquals(luizFelipe.getTelefone(), "9990");
     }
 
+    @Test
+    public void deveriaListarContasComunsCorretamente() {
+        contas.adicionarContaComum(joaoPedro);
+        var retornoConta = contas.listarContasComum().get(0);
+        assertEquals(joaoPedro, retornoConta);
+    }
 
+    @Test
+    public void deveriaListarContasPremiumCorretamente() {
+        contas.adicionarContaNaListaPremium(luizFelipe);
+        assertEquals(luizFelipe, contas.listarContasPremium().get(0));
+    }
 
+    @Test
+    public void deveriaRemoverContaComum() {
+        contas.adicionarContaComum(joaoPedro);
+        assertTrue(contas.removerContaComum(0));
+    }
+
+    @Test
+    public void deveriaRemoverContaPremium() {
+        contas.adicionarContaNaListaPremium(luizFelipe);
+        assertTrue(contas.removerContaPremium(0));
+    }
+
+    @Test
+    public void deveriaEditarContaComum() {
+        contas.adicionarContaComum(joaoPedro);
+        joaoPedro.setEmail("correio.com");
+        var contaEditada = contas.editarContaComum(0, joaoPedro);
+        var emailEditado = contaEditada.getEmail();
+        assertEquals("correio.com", emailEditado);
+    }
+
+    @Test
+    public void deveriaEditarContaPremium() {
+        contas.adicionarContaNaListaPremium(luizFelipe);
+        Integer novoId = 6;
+        luizFelipe.setIdCliente(novoId);
+        var contaEditada = contas.editarContaPremium(0, luizFelipe);
+        var idEditado = contaEditada.getIdCliente();
+        assertEquals(novoId, idEditado);
+    }
 }
