@@ -16,6 +16,46 @@ public class Livro {
     private Idioma idioma;
     private List<Livro> livros = new ArrayList<>();
 
+    //COLOQUEI ABAIXO OS MÉTODOS QUE USEI    ///////////////////////////////////////////////////
+    private List<Livro> cadastrados = new ArrayList<>();
+
+    public Livro(Integer id, String titulo) {
+        this.id = id;
+        this.titulo = titulo;
+    }
+
+    public void cadastrar(Livro livro) {
+        this.cadastrados.add(livro);
+    }
+
+    public void imprimir() {
+        System.out.println("Id: " + this.getId());
+        System.out.println("Titulo" + this.getTitulo());
+    }
+
+    public void imprimirBuscado(Livro buscado) {
+        System.out.println(buscado.getTitulo());
+    }
+
+    public Livro buscarPorId(Integer id) {
+                Livro buscado = this.cadastrados.stream()
+                .filter(livro -> livro.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Livro não encontrado"));
+                imprimirBuscado(buscado);
+                return buscado;
+    }
+
+    public void listarTodosLivrosCadastrados() {
+        for(Livro livro : this.cadastrados) {
+            livro.imprimir();
+        }
+    }
+
+
+
+    //////////////////////////////////////////////////////////////////
+
     public Livro() {
 
     }
