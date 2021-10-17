@@ -46,7 +46,7 @@ public class Contas {
         contaParaEditar.setNome(conta.getNome());
         contaParaEditar.setEmail(conta.getEmail());
         contaParaEditar.setTelefone(conta.getTelefone());
-        contaParaEditar.setLivro(conta.getLivro());
+        //contaParaEditar.setLivro(conta.getLivro());
         contaParaEditar.setStatus(conta.getStatus());
         return contaParaEditar;
     }
@@ -57,7 +57,7 @@ public class Contas {
         contaParaEditar.setNome(conta.getNome());
         contaParaEditar.setEmail(conta.getEmail());
         contaParaEditar.setTelefone(conta.getTelefone());
-        contaParaEditar.setLivro(conta.getLivro());
+        //contaParaEditar.setLivro(conta.getLivro());
         contaParaEditar.setStatus(conta.getStatus());
         return contaParaEditar;
     }

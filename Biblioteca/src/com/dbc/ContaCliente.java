@@ -2,13 +2,21 @@ package com.dbc;
 
 import java.util.*;
 
-public abstract class ContaCliente {
+public class ContaCliente {
     private Integer idCliente;
     private String nome;
     private String telefone;
     private String email;
-    private Livro livro;
+    //private Livro livro;
     private StatusCliente status;
+
+    public ContaCliente(Integer idCliente, String nome, String telefone, String email, StatusCliente status) {
+        this.idCliente = idCliente;
+        this.nome = nome;
+        this.telefone = telefone;
+        this.email = email;
+        this.status = status;
+    }
 
     public boolean editarId(int novoId) {
         if (novoId > 0) {
@@ -62,13 +70,13 @@ public abstract class ContaCliente {
         this.email = email;
     }
 
-    public Livro getLivro() {
-        return livro;
-    }
-
-    public void setLivro(Livro livro) {
-        this.livro = livro;
-    }
+//    public Livro getLivro() {
+//        return livro;
+//    }
+//
+//    public void setLivro(Livro livro) {
+//        this.livro = livro;
+//    }
 
     public StatusCliente getStatus() {
         return status;
@@ -78,5 +86,15 @@ public abstract class ContaCliente {
         this.status = status;
     }
 
-
+    @Override
+    public String toString() {
+        return "ContaCliente{" +
+                "idCliente=" + idCliente +
+                ", nome='" + nome + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", email='" + email + '\'' +
+                //", livro=" + livro +
+                ", status=" + status +
+                '}';
+    }
 }

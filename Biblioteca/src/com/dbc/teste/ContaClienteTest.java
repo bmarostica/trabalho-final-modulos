@@ -8,10 +8,10 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class ContaClienteTest {
-    private ContaClienteComum joaoVitor = new ContaClienteComum();
-    private ContaClienteComum joaoPedro = new ContaClienteComum();
-    private ContaCLientePremium luizFelipe = new ContaCLientePremium();
-    private ContaCLientePremium luizGuilherme = new ContaCLientePremium();
+    private ContaClienteComum joaoVitor = new ContaClienteComum(5, "joao vitor", "5555", "555", StatusCliente.OK);
+    private ContaClienteComum joaoPedro = new ContaClienteComum(65, "joao pedro", "5555", "555", StatusCliente.OK);
+    private ContaCLientePremium luizFelipe = new ContaCLientePremium(9, "aaa", "5555", "555", StatusCliente.OK);
+    private ContaCLientePremium luizGuilherme = new ContaCLientePremium(53, "aaa", "5555", "555", StatusCliente.OK);
     private Contas contas = new Contas();
 
 
@@ -35,7 +35,11 @@ public class ContaClienteTest {
     public void deveriaConseguirAdicionarContaComum() {
         List<ContaClienteComum> listaClientesComum = new ArrayList<>();
         listaClientesComum.add(joaoVitor);
+        //joaoVitor.setNome("a");
         assertTrue(listaClientesComum.contains(joaoVitor));
+        joaoVitor.imprimirContaComum();
+        System.out.println(listaClientesComum);
+        System.out.println(joaoVitor.getNome());
     }
 
     @Test

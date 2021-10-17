@@ -6,16 +6,13 @@ import java.util.*;
 public class Livro {
     Scanner input = new Scanner(System.in);
 
-    private static final String MENSAGEM_DE_ERRO =  "Opção inválida!";
-    private static final Integer EMPRESTIMO_CLIENTE_COMUM = 7;
-    private static final Integer EMPRESTIMO_CLIENTE_PREMIUM = 30;
+    private static final String MENSAGEM_DE_ERRO = "Opção inválida!";
 
     private Integer id;
     private String titulo;
     private String autor;
     private String editora;
     private Integer numeroDePaginas;
-    private Integer periodoDeEmprestimo;
     private Formato formato;
     private Idioma idioma;
     private List<Livro> livros = new ArrayList<>();
@@ -55,10 +52,9 @@ public class Livro {
             condicao = input.nextInt();
             input.nextLine();
 
-            if(condicao >= 1 && condicao <= 2) {
+            if (condicao >= 1 && condicao <= 2) {
                 setFormato(Formato.values()[condicao - 1]);
-            }
-            else {
+            } else {
                 System.err.println(MENSAGEM_DE_ERRO);
             }
         } while (condicao != 1 && condicao != 2);
@@ -67,10 +63,9 @@ public class Livro {
             System.out.println("Informe o Idioma: 1 - para PORTUGUÊS, 2 - para INGLÊS ou 3 - para ESPANHOL");
             condicao = input.nextInt();
             input.nextLine();
-            if(condicao >= 1 && condicao <= 3) {
-                setFormato(Formato.values()[condicao - 1]);
-            }
-            else {
+            if (condicao >= 1 && condicao <= 3) {
+                setIdioma(Idioma.values()[condicao - 1]);
+            } else {
                 System.err.println(MENSAGEM_DE_ERRO);
             }
         } while (condicao != 1 && condicao != 2 && condicao != 3);
@@ -176,10 +171,9 @@ public class Livro {
                         condicao = input.nextInt();
                         input.nextLine();
 
-                        if(condicao >= 1 && condicao <= 2) {
+                        if (condicao >= 1 && condicao <= 2) {
                             livros.get(idLivro - 1).setFormato(Formato.values()[condicao - 1]);
-                        }
-                        else {
+                        } else {
                             System.err.println(MENSAGEM_DE_ERRO);
                         }
                     } while (condicao != 1 && condicao != 2);
@@ -189,10 +183,9 @@ public class Livro {
                         System.out.println("Informe o Idioma: 1 - para PORTUGUÊS, 2 - para INGLÊS ou 3 - para ESPANHOL");
                         condicao = input.nextInt();
                         input.nextLine();
-                        if(condicao >= 1 && condicao <= 3) {
-                            livros.get(idLivro - 1).setFormato(Formato.values()[condicao - 1]);
-                        }
-                        else {
+                        if (condicao >= 1 && condicao <= 3) {
+                            livros.get(idLivro - 1).setIdioma(Idioma.values()[condicao - 1]);
+                        } else {
                             System.err.println(MENSAGEM_DE_ERRO);
                         }
                     } while (condicao != 1 && condicao != 2 && condicao != 3);
@@ -217,33 +210,6 @@ public class Livro {
         livros.remove(livros.get(idLivro - 1));
 
         System.out.println(livros);
-    }
-
-
-    //deve retornar o dia de devolução
-    public LocalDate devolucaoLivro(LocalDate emprestimo, ContaCliente cliente) {
-        LocalDate devolucao = LocalDate.of(0, 1, 1);
-
-        if(cliente.equals(clienteComum.getNome().toLowerCase())){
-            devolucao = LocalDate.now().plusDays(EMPRESTIMO_CLIENTE_COMUM);
-        }
-        else if(cliente.equals(cLientePremium.getNome().toLowerCase())){
-            devolucao = LocalDate.now().plusDays(EMPRESTIMO_CLIENTE_PREMIUM);
-        }
-        System.out.println(devolucao);
-        return devolucao;
-    }
-
-    //deve retornar se o livro esta atrasado ou não
-    public Boolean estaAtrasado(LocalDate diaDevolucao, LocalDate emprestimo, ContaCliente cliente){
-        if(diaDevolucao.isAfter(devolucaoLivro(emprestimo, cliente))){
-            System.out.println("Devolução atrasada!");
-            return true;
-        }
-        else{
-            System.out.println("Entrega em dia.");
-            return false;
-        }
     }
 
     public Integer getId() {
@@ -284,14 +250,6 @@ public class Livro {
 
     public void setNumeroDePaginas(Integer numeroDePaginas) {
         this.numeroDePaginas = numeroDePaginas;
-    }
-
-    public Integer getPeriodoDeEmprestimo() {
-        return periodoDeEmprestimo;
-    }
-
-    public void setPeriodoDeEmprestimo(Integer periodoDeEmprestimo) {
-        this.periodoDeEmprestimo = periodoDeEmprestimo;
     }
 
     public Formato getFormato() {
