@@ -30,7 +30,7 @@ public class Livro {
 
     public void imprimir() {
         System.out.println("Id: " + this.getId());
-        System.out.println("Titulo" + this.getTitulo());
+        System.out.println("Titulo: " + this.getTitulo());
     }
 
     public void imprimirBuscado(Livro buscado) {

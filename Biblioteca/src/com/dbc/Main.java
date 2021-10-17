@@ -10,15 +10,26 @@ public class Main {
         Livro livro6 = new Livro(06, "Harry Potter 6");
         Livro livro7 = new Livro(07, "Harry Potter 7");
 
+
+//        livro.cadastrar(livro2);
+//        livro.cadastrar(livro3);
+//        livro.cadastrar(livro4);
+//        livro.cadastrar(livro5);
+//        livro.cadastrar(livro6);
+//        livro.cadastrar(livro7);
+//        livro.buscarPorId(4);
+//        livro.listarTodosLivrosCadastrados();
+        ContaClientePremium joao = new ContaClientePremium();
+        Funcionario alex = new Funcionario();
+        alex.setNomeFuncionario("Alex");
+        joao.setNome("João");
+
         livro.cadastrar(livro);
-        livro.cadastrar(livro2);
-        livro.cadastrar(livro3);
-        livro.cadastrar(livro4);
-        livro.cadastrar(livro5);
-        livro.cadastrar(livro6);
-        livro.cadastrar(livro7);
-        livro.buscarPorId(4);
-        livro.listarTodosLivrosCadastrados();
+
+        Emprestimo transacao1 = new Emprestimo(livro2, joao, alex);
+        transacao1.efetuarEmprestimo(transacao1);
+
+
 
 
     }
