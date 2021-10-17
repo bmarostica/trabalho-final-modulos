@@ -8,19 +8,19 @@ public class Emprestimo {
 
     private Livro livro;
     private ContaClienteComum clienteComum;
-    private ContaCliente cLientePremium;
+    private ContaClientePremium clientePremium;
 
     public Emprestimo() {
     }
 
     //deve retornar o dia de devolução
-    public LocalDate devolucaoLivro(LocalDate emprestimo, ContaClienteComum cliente) {
-        LocalDate devolucao = LocalDate.of(0, 1, 1);
+    public LocalDate devolucaoLivro(LocalDate emprestimo, ContaCliente cliente) {
+        LocalDate devolucao = LocalDate.MIN;
 
-        if (clienteComum.getNome().toLowerCase().contains(cliente.getNome().toLowerCase())) {
-            devolucao = LocalDate.now().plusDays(EMPRESTIMO_CLIENTE_COMUM);
-        } else if (cliente.toString().equalsIgnoreCase(cLientePremium.getNome())){
-            devolucao = LocalDate.now().plusDays(EMPRESTIMO_CLIENTE_PREMIUM);
+        if (cliente.equals(clienteComum)){
+            devolucao = emprestimo.plusDays(EMPRESTIMO_CLIENTE_COMUM);
+        } else if (cliente.equals(clientePremium)){
+            devolucao = emprestimo.plusDays(EMPRESTIMO_CLIENTE_PREMIUM);
         }
         System.out.println(devolucao);
         return devolucao;
@@ -36,10 +36,5 @@ public class Emprestimo {
             return false;
         }
     }
-
-    public void emprestimo(){
-
-    }
-
 
 }

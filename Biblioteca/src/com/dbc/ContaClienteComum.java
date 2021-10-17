@@ -10,13 +10,17 @@ public class ContaClienteComum extends ContaCliente {
         super(idCliente, nome, telefone, email, status);
     }
 
+    public ContaClienteComum(){
+
+    }
+
     public void imprimirContaComum() {
         System.out.println("CLIENTE CONTA COMUM- "
                 + "Id: " + this.getIdCliente()
                 + "Nome: " + this.getNome()
                 + "Telefone: " + this.getTelefone()
                 + "Email: " + this.getEmail()
-         //       + "Livro alugado: " + this.getLivro()
+                + "Livro alugado: " + this.getLivro()
                 + "Status: " + this.getStatus());
     }
 
@@ -42,7 +46,7 @@ public class ContaClienteComum extends ContaCliente {
         contaParaEditar.setNome(conta.getNome());
         contaParaEditar.setEmail(conta.getEmail());
         contaParaEditar.setTelefone(conta.getTelefone());
-        //contaParaEditar.setLivro(conta.getLivro());
+        contaParaEditar.setLivro(conta.getLivro());
         contaParaEditar.setStatus(conta.getStatus());
         return contaParaEditar;
     }

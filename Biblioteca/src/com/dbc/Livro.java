@@ -1,6 +1,5 @@
 package com.dbc;
 
-import java.time.LocalDate;
 import java.util.*;
 
 public class Livro {
@@ -74,7 +73,7 @@ public class Livro {
     }
 
     public void adicionarLivroNaBase() {
-        int condicao = 0;
+        Integer condicao = 0;
 
         do {
             livros.add(cadastroDeLivro());
@@ -94,7 +93,7 @@ public class Livro {
     }
 
     public List<Livro> buscarLivro() {
-        int condicao = 0;
+        Integer condicao = 0;
         List<Livro> lista = new ArrayList<>();
 
         do {
@@ -120,88 +119,95 @@ public class Livro {
 
         } while (condicao != 0);
 
-        lista.stream().forEach(System.out::println);
-
         return lista;
     }
 
     public void alterarLivro() {
+        int condicao = 0;
         int opcao = 0;
 
         System.out.println("Para realizar a alteração de dados de um livro realize a busca primeiramente:");
         buscarLivro();
 
-        System.out.println("Informe o ID para alteração:");
+        System.out.println("Informe o ID do livro para alteração:");
         Integer idLivro = input.nextInt();
 
-        int condicao = 0;
         do {
-            System.out.println("Informe o número do item que você deseja alterar:");
-            System.out.println("1 - Título");
-            System.out.println("2 - Autor");
-            System.out.println("3 - Editora");
-            System.out.println("4 - Número de Páginas");
-            System.out.println("5 - Formato");
-            System.out.println("6 - Idioma");
-            System.out.println("0 - Sair");
-            opcao = input.nextInt();
+
+            do {
+                System.out.println("Informe o número do item que você deseja alterar:");
+                System.out.println("1 - Título");
+                System.out.println("2 - Autor");
+                System.out.println("3 - Editora");
+                System.out.println("4 - Número de Páginas");
+                System.out.println("5 - Formato");
+                System.out.println("6 - Idioma");
+                System.out.println("0 - Sair");
+                opcao = input.nextInt();
+                input.nextLine();
+
+                switch (opcao) {
+                    case 1:
+                        System.out.println("Informe o novo título");
+                        livros.get(idLivro - 1).setTitulo(input.nextLine());
+                        break;
+                    case 2:
+                        System.out.println("Informe o novo autor");
+                        livros.get(idLivro - 1).setAutor(input.nextLine());
+                        break;
+                    case 3:
+                        System.out.println("Informe o novo editora");
+                        livros.get(idLivro - 1).setEditora(input.nextLine());
+                        break;
+                    case 4:
+                        System.out.println("Informe o novo Número de páginas");
+                        livros.get(idLivro - 1).setNumeroDePaginas(input.nextInt());
+                        input.nextLine();
+                        break;
+                    case 5:
+                        do {
+                            System.out.println("Informe o formato: 1 - para Brochura, 2 - para CapaDura");
+                            condicao = input.nextInt();
+                            input.nextLine();
+
+                            if (condicao >= 1 && condicao <= 2) {
+                                livros.get(idLivro - 1).setFormato(Formato.values()[condicao - 1]);
+                            } else {
+                                System.err.println(MENSAGEM_DE_ERRO);
+                            }
+                        } while (condicao != 1 && condicao != 2);
+                        break;
+                    case 6:
+                        do {
+                            System.out.println("Informe o Idioma: 1 - para PORTUGUÊS, 2 - para INGLÊS ou 3 - para ESPANHOL");
+                            condicao = input.nextInt();
+                            input.nextLine();
+                            if (condicao >= 1 && condicao <= 3) {
+                                livros.get(idLivro - 1).setIdioma(Idioma.values()[condicao - 1]);
+                            } else {
+                                System.err.println(MENSAGEM_DE_ERRO);
+                            }
+                        } while (condicao != 1 && condicao != 2 && condicao != 3);
+                        break;
+                    case 0:
+                        break;
+                    default:
+                        System.err.println(MENSAGEM_DE_ERRO);
+                }
+
+            } while (opcao < 0 || opcao > 6);
+
+            System.out.println("Deseja realizar outra alteração? Digite 1 para sim e 0 para não: ");
+            condicao = input.nextInt();
             input.nextLine();
 
-            switch (opcao) {
-                case 1:
-                    System.out.println("Informe o novo título");
-                    livros.get(idLivro - 1).setTitulo(input.nextLine());
-                    break;
-                case 2:
-                    System.out.println("Informe o novo autor");
-                    livros.get(idLivro - 1).setAutor(input.nextLine());
-                    break;
-                case 3:
-                    System.out.println("Informe o novo editora");
-                    livros.get(idLivro - 1).setEditora(input.nextLine());
-                    break;
-                case 4:
-                    System.out.println("Informe o novo Número de páginas");
-                    livros.get(idLivro - 1).setNumeroDePaginas(input.nextInt());
-                    input.nextLine();
-                    break;
-                case 5:
-                    do {
-                        System.out.println("Informe o formato: 1 - para Brochura, 2 - para CapaDura");
-                        condicao = input.nextInt();
-                        input.nextLine();
-
-                        if (condicao >= 1 && condicao <= 2) {
-                            livros.get(idLivro - 1).setFormato(Formato.values()[condicao - 1]);
-                        } else {
-                            System.err.println(MENSAGEM_DE_ERRO);
-                        }
-                    } while (condicao != 1 && condicao != 2);
-                    break;
-                case 6:
-                    do {
-                        System.out.println("Informe o Idioma: 1 - para PORTUGUÊS, 2 - para INGLÊS ou 3 - para ESPANHOL");
-                        condicao = input.nextInt();
-                        input.nextLine();
-                        if (condicao >= 1 && condicao <= 3) {
-                            livros.get(idLivro - 1).setIdioma(Idioma.values()[condicao - 1]);
-                        } else {
-                            System.err.println(MENSAGEM_DE_ERRO);
-                        }
-                    } while (condicao != 1 && condicao != 2 && condicao != 3);
-                    break;
-                case 0:
-                    break;
-                default:
-                    System.err.println(MENSAGEM_DE_ERRO);
-            }
-        } while (opcao < 0 || opcao > 6);
+        } while (condicao != 0);
 
         System.out.println(livros);
     }
 
     public void deletar() {
-        System.out.println("Para realizar a alteração de dados de um livro realize a busca primeiramente:");
+        System.out.println("Para realizar a exclusão de um livro da base realize a busca primeiramente:");
         buscarLivro();
 
         System.out.println("Informe o ID para exclusão:");

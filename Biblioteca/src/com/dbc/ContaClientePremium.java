@@ -3,12 +3,16 @@ package com.dbc;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContaCLientePremium extends ContaCliente implements PlanosDeAssinatura {
+public class ContaClientePremium extends ContaCliente implements PlanosDeAssinatura {
     private double pontosFidelidade;
-    private List<ContaCLientePremium> listaPremium = new ArrayList<>();
+    private List<ContaClientePremium> listaPremium = new ArrayList<>();
 
-    public ContaCLientePremium(Integer idCliente, String nome, String telefone, String email, StatusCliente status) {
+    public ContaClientePremium(Integer idCliente, String nome, String telefone, String email, StatusCliente status) {
         super(idCliente, nome, telefone, email, status);
+    }
+
+    public ContaClientePremium(){
+
     }
 
     public void cobrarMensalidade(double valor) {
@@ -33,14 +37,14 @@ public class ContaCLientePremium extends ContaCliente implements PlanosDeAssinat
         this.pontosFidelidade = pontosFidelidade;
     }
 
-    public List<ContaCLientePremium> listarContasPremium() {
+    public List<ContaClientePremium> listarContasPremium() {
         for (int i = 0; i < listaPremium.size(); i++) {
             System.out.println("id=" + i + " | " + listaPremium.get(i));
         }
         return this.listaPremium;
     }
 
-    public void adicionarContaNaListaPremium(ContaCLientePremium conta) {
+    public void adicionarContaNaListaPremium(ContaClientePremium conta) {
         this.listaPremium.add(conta);
     }
 
@@ -49,8 +53,8 @@ public class ContaCLientePremium extends ContaCliente implements PlanosDeAssinat
         return true;
     }
 
-    public ContaCLientePremium editarContaPremium(Integer indice, ContaCLientePremium conta) {
-        ContaCLientePremium contaParaEditar = listaPremium.get(indice);
+    public ContaClientePremium editarContaPremium(Integer indice, ContaClientePremium conta) {
+        ContaClientePremium contaParaEditar = listaPremium.get(indice);
         contaParaEditar.setIdCliente(conta.getIdCliente());
         contaParaEditar.setNome(conta.getNome());
         contaParaEditar.setEmail(conta.getEmail());

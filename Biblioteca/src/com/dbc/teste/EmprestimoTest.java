@@ -4,8 +4,6 @@ import com.dbc.*;
 import org.junit.Test;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -15,20 +13,19 @@ public class EmprestimoTest {
     public void deveTestarODiaDeDevolucaoDoLivroDoClienteComumComSucesso(){
         //Arrange
         Livro livro = new Livro();
+        ContaCliente contas = new ContaCliente();
+        ContaClienteComum joao = new ContaClienteComum(5, "jaaaaaa", "5555", "555", StatusCliente.OK);
 
+        joao.adicionarContaComum(joao);
 
-        ContaClienteComum aa = new ContaClienteComum(5, "joao", "5555", "555", StatusCliente.OK);
-
-        aa.adicionarContaComum(aa);
-
-        System.out.println(aa.getNome());
-        System.out.println(aa);
-        System.out.println("lista" + aa.listarContasComum());
+        System.out.println(joao.getNome());
+        System.out.println(joao);
+        System.out.println("lista" + joao.listarContasComum());
 
         Emprestimo emprestimo = new Emprestimo();
 
         //Act
-        LocalDate devolucao = emprestimo.devolucaoLivro(LocalDate.now(), aa);
+        LocalDate devolucao = emprestimo.devolucaoLivro(LocalDate.now(), joao);
 
         //Assert
         assertEquals(devolucao, LocalDate.of(2021, 10, 24));

@@ -8,11 +8,12 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class ContaClienteTest {
-    private ContaClienteComum joaoVitor = new ContaClienteComum(5, "joao vitor", "5555", "555", StatusCliente.OK);
-    private ContaClienteComum joaoPedro = new ContaClienteComum(65, "joao pedro", "5555", "555", StatusCliente.OK);
-    private ContaCLientePremium luizFelipe = new ContaCLientePremium(9, "aaa", "5555", "555", StatusCliente.OK);
-    private ContaCLientePremium luizGuilherme = new ContaCLientePremium(53, "aaa", "5555", "555", StatusCliente.OK);
-    private Contas contas = new Contas();
+    private ContaClienteComum joaoVitor = new ContaClienteComum(5, "Joao Vitor", "5555", "555", StatusCliente.OK);
+    private ContaClienteComum joaoPedro = new ContaClienteComum(65, "Joao Pedro", "5555", "555", StatusCliente.OK);
+    private ContaClientePremium luizFelipe = new ContaClientePremium(9, "Luiz Felipe", "5555", "555", StatusCliente.OK);
+    private ContaClientePremium luizGuilherme = new ContaClientePremium(53, "Luiz Guilherme", "5555", "555", StatusCliente.OK);
+    private ContaClienteComum contaComum = new ContaClienteComum();
+    private ContaClientePremium contaPremium = new ContaClientePremium();
 
 
 
@@ -35,11 +36,7 @@ public class ContaClienteTest {
     public void deveriaConseguirAdicionarContaComum() {
         List<ContaClienteComum> listaClientesComum = new ArrayList<>();
         listaClientesComum.add(joaoVitor);
-        //joaoVitor.setNome("a");
         assertTrue(listaClientesComum.contains(joaoVitor));
-        joaoVitor.imprimirContaComum();
-        System.out.println(listaClientesComum);
-        System.out.println(joaoVitor.getNome());
     }
 
     @Test
@@ -51,44 +48,44 @@ public class ContaClienteTest {
 
     @Test
     public void deveriaListarContasComunsCorretamente() {
-        contas.adicionarContaComum(joaoPedro);
-        var retornoConta = contas.listarContasComum().get(0);
+        contaComum.adicionarContaComum(joaoPedro);
+        var retornoConta = contaComum.listarContasComum().get(0);
         assertEquals(joaoPedro, retornoConta);
     }
 
     @Test
     public void deveriaListarContasPremiumCorretamente() {
-        contas.adicionarContaNaListaPremium(luizFelipe);
-        assertEquals(luizFelipe, contas.listarContasPremium().get(0));
+        contaPremium.adicionarContaNaListaPremium(luizFelipe);
+        assertEquals(luizFelipe, contaPremium.listarContasPremium().get(0));
     }
 
     @Test
     public void deveriaRemoverContaComum() {
-        contas.adicionarContaComum(joaoPedro);
-        assertTrue(contas.removerContaComum(0));
+        contaComum.adicionarContaComum(joaoPedro);
+        assertTrue(contaComum.removerContaComum(0));
     }
 
     @Test
     public void deveriaRemoverContaPremium() {
-        contas.adicionarContaNaListaPremium(luizFelipe);
-        assertTrue(contas.removerContaPremium(0));
+        contaPremium.adicionarContaNaListaPremium(luizFelipe);
+        assertTrue(contaPremium.removerContaPremium(0));
     }
 
     @Test
     public void deveriaEditarContaComum() {
-        contas.adicionarContaComum(joaoPedro);
+        contaComum.adicionarContaComum(joaoPedro);
         joaoPedro.setEmail("correio.com");
-        var contaEditada = contas.editarContaComum(0, joaoPedro);
+        var contaEditada = contaComum.editarContaComum(0, joaoPedro);
         var emailEditado = contaEditada.getEmail();
         assertEquals("correio.com", emailEditado);
     }
 
     @Test
     public void deveriaEditarContaPremium() {
-        contas.adicionarContaNaListaPremium(luizFelipe);
+        contaPremium.adicionarContaNaListaPremium(luizFelipe);
         Integer novoId = 6;
         luizFelipe.setIdCliente(novoId);
-        var contaEditada = contas.editarContaPremium(0, luizFelipe);
+        var contaEditada = contaPremium.editarContaPremium(0, luizFelipe);
         var idEditado = contaEditada.getIdCliente();
         assertEquals(novoId, idEditado);
     }

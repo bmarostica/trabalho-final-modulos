@@ -7,8 +7,12 @@ public class ContaCliente {
     private String nome;
     private String telefone;
     private String email;
-    //private Livro livro;
+    private Livro livro;
     private StatusCliente status;
+
+    public ContaCliente(){
+
+    }
 
     public ContaCliente(Integer idCliente, String nome, String telefone, String email, StatusCliente status) {
         this.idCliente = idCliente;
@@ -70,13 +74,13 @@ public class ContaCliente {
         this.email = email;
     }
 
-//    public Livro getLivro() {
-//        return livro;
-//    }
-//
-//    public void setLivro(Livro livro) {
-//        this.livro = livro;
-//    }
+    public Livro getLivro() {
+        return livro;
+    }
+
+    public void setLivro(Livro livro) {
+        this.livro = livro;
+    }
 
     public StatusCliente getStatus() {
         return status;
@@ -93,7 +97,7 @@ public class ContaCliente {
                 ", nome='" + nome + '\'' +
                 ", telefone='" + telefone + '\'' +
                 ", email='" + email + '\'' +
-                //", livro=" + livro +
+                ", livro=" + livro +
                 ", status=" + status +
                 '}';
     }
