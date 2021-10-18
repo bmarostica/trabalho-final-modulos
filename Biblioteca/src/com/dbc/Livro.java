@@ -16,46 +16,6 @@ public class Livro {
     private Idioma idioma;
     private List<Livro> livros = new ArrayList<>();
 
-    //COLOQUEI ABAIXO OS MÉTODOS QUE USEI    ///////////////////////////////////////////////////
-    private List<Livro> cadastrados = new ArrayList<>();
-
-    public Livro(Integer id, String titulo) {
-        this.id = id;
-        this.titulo = titulo;
-    }
-
-    public void cadastrar(Livro livro) {
-        this.cadastrados.add(livro);
-    }
-
-    public void imprimir() {
-        System.out.println("Id: " + this.getId());
-        System.out.println("Titulo: " + this.getTitulo());
-    }
-
-    public void imprimirBuscado(Livro buscado) {
-        System.out.println(buscado.getTitulo());
-    }
-
-    public Livro buscarPorId(Integer id) {
-                Livro buscado = this.cadastrados.stream()
-                .filter(livro -> livro.getId().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Livro não encontrado"));
-                imprimirBuscado(buscado);
-                return buscado;
-    }
-
-    public void listarTodosLivrosCadastrados() {
-        for(Livro livro : this.cadastrados) {
-            livro.imprimir();
-        }
-    }
-
-
-
-    //////////////////////////////////////////////////////////////////
-
     public Livro() {
 
     }
@@ -112,7 +72,7 @@ public class Livro {
         return new Livro(getId(), getTitulo(), getAutor(), getEditora(), getNumeroDePaginas(), getFormato(), getIdioma());
     }
 
-    public void adicionarLivroNaBase() {
+    public void adicionarLivroNaBaseIteracao() {
         Integer condicao = 0;
 
         do {
@@ -130,6 +90,10 @@ public class Livro {
         } while (condicao != 0);
 
         System.out.println(livros);
+    }
+
+    public void acidionarLivroNaBase(Livro livro) {
+        this.livros.add(livro);
     }
 
     public List<Livro> buscarLivro() {
@@ -160,6 +124,15 @@ public class Livro {
         } while (condicao != 0);
 
         return lista;
+    }
+
+    public Livro buscarPorId(Integer id) {
+        Livro buscado = this.livros.stream()
+                .filter(livro -> livro.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Livro não encontrado"));
+        imprimirBuscado(buscado);
+        return buscado;
     }
 
     public void alterarLivro() {
@@ -246,16 +219,39 @@ public class Livro {
         System.out.println(livros);
     }
 
-    public void deletar() {
-        System.out.println("Para realizar a exclusão de um livro da base realize a busca primeiramente:");
-        buscarLivro();
-
+    public void deletarDaBase() {
         System.out.println("Informe o ID para exclusão:");
         Integer idLivro = input.nextInt();
 
         livros.remove(livros.get(idLivro - 1));
 
         System.out.println(livros);
+    }
+
+    public void deletarParaEmprestimo(Livro livro){
+        List<Livro> emprestados = new ArrayList<>();
+        livros.remove(livro);
+        emprestados.add(livro);
+    }
+
+    public void listarTodosLivrosCadastrados() {
+        for(Livro livro : this.livros) {
+            livro.imprimir();
+        }
+    }
+
+    public void imprimirBuscado(Livro buscado) {
+        System.out.println(buscado.getTitulo());
+    }
+
+    public void imprimir() {
+        System.out.println("Id: " + this.getId());
+        System.out.println("Titulo: " + this.getTitulo());
+        System.out.println("Autor: " + this.getAutor());
+        System.out.println("Editora: " + this.getEditora());
+        System.out.println("Número de páginas: " + this.getNumeroDePaginas());
+        System.out.println("Formato: " + this.getFormato());
+        System.out.println("Idioma: " + this.getIdioma());
     }
 
     public Integer getId() {
