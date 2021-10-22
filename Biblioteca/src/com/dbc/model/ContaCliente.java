@@ -2,6 +2,7 @@ package com.dbc.model;
 
 public class ContaCliente{
     private Integer idCliente;
+    private TipoCliente tipoCliente;
     private String nome;
     private String telefone;
     private String email;
@@ -13,8 +14,9 @@ public class ContaCliente{
 
     }
 
-    public ContaCliente(Integer idCliente, String nome, String telefone, String email, Livro livro, StatusCliente status, Integer pontosFidelidade) {
+    public ContaCliente(Integer idCliente, TipoCliente tipoCliente, String nome, String telefone, String email, Livro livro, StatusCliente status, Integer pontosFidelidade) {
         this.idCliente = idCliente;
+        this.tipoCliente = tipoCliente;
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
@@ -31,6 +33,15 @@ public class ContaCliente{
         this.status = status;
     }
 
+    public ContaCliente(Integer idCliente, TipoCliente tipoCliente, String nome, String telefone, String email, StatusCliente status) {
+        this.idCliente = idCliente;
+        this.tipoCliente = tipoCliente;
+        this.nome = nome;
+        this.telefone = telefone;
+        this.email = email;
+        this.status = status;
+    }
+
 
     public Integer getIdCliente() {
         return idCliente;
@@ -38,6 +49,14 @@ public class ContaCliente{
 
     public void setIdCliente(Integer idCliente) {
         this.idCliente = idCliente;
+    }
+
+    public TipoCliente getTipoCliente() {
+        return tipoCliente;
+    }
+
+    public void setTipoCliente(TipoCliente tipoCliente) {
+        this.tipoCliente = tipoCliente;
     }
 
     public String getNome() {
@@ -92,6 +111,7 @@ public class ContaCliente{
     public String toString() {
         return "ContaCliente{" +
                 "idCliente=" + idCliente +
+                "Tipo do Cliente: " + tipoCliente +
                 ", nome='" + nome + '\'' +
                 ", telefone='" + telefone + '\'' +
                 ", email='" + email + '\'' +

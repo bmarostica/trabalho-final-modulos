@@ -2,6 +2,8 @@ package com.dbc.repository;
 
 import com.dbc.exceptions.BancoDeDadosException;
 import com.dbc.model.ContaCliente;
+import com.dbc.model.StatusCliente;
+import com.dbc.model.TipoCliente;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -31,9 +33,9 @@ public class ContaClienteRepository implements Repositorio<Integer, ContaCliente
             Integer proximoId = this.getProximoId(con);
             conta.setIdCliente(proximoId);
 
-            String sql = "INSERT INTO CONTA\n" +
-                    "(ID_CLIENTE, NOME, TELEFONE, EMAIL)\n" +
-                    "VALUES(?, ?, ?, ?)\n";
+            String sql = "INSERT INTO CLIENTE\n" +
+                    "(ID_CLIENTE, NOME, TELEFONE, EMAIL, STATUS_CLIENTE, TIPO_CLIENTE) \n" +
+                    "VALUES(?, ?, ?, ?, ?, ?)\n";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
@@ -41,6 +43,8 @@ public class ContaClienteRepository implements Repositorio<Integer, ContaCliente
             stmt.setString(2, conta.getNome());
             stmt.setString(3, conta.getTelefone());
             stmt.setString(4, conta.getEmail());
+            stmt.setInt(5, conta.getStatus().getDescricao());
+            stmt.setInt(5, conta.getTipoCliente().getTipo());
 
             int res = stmt.executeUpdate();
             System.out.println("adicionarConta.res=" + res);
@@ -96,17 +100,23 @@ public class ContaClienteRepository implements Repositorio<Integer, ContaCliente
 
             StringBuilder sql = new StringBuilder();
             sql.append("UPDATE CONTA SET ");
-            sql.append(" email = ?,");
+            sql.append(" id = ?,");
             sql.append(" nome = ?,");
             sql.append(" telefone = ? ");
+            sql.append(" email = ? ");
+            sql.append(" status ? ");
+            sql.append(" tipo ?");
             sql.append(" WHERE id_cliente = ? ");
 
             PreparedStatement stmt = con.prepareStatement(sql.toString());
 
-            stmt.setString(1, conta.getEmail());
+            stmt.setInt(1, conta.getIdCliente());
             stmt.setString(2, conta.getNome());
             stmt.setString(3, conta.getTelefone());
-            stmt.setInt(4, id);
+            stmt.setString(4, conta.getEmail());
+            stmt.setInt(5, conta.getStatus().getDescricao());
+            stmt.setInt(6, conta.getTipoCliente().getTipo());
+
 
 
             int res = stmt.executeUpdate();
@@ -145,7 +155,8 @@ public class ContaClienteRepository implements Repositorio<Integer, ContaCliente
                 conta.setNome(res.getString("nome"));
                 conta.setTelefone(res.getString("telefone"));
                 conta.setEmail(res.getString("email"));
-                contas.add(conta);
+                conta.setStatus(StatusCliente.ofStatus(res.getInt("status_cliente")));
+                conta.setTipoCliente(TipoCliente.ofTipo(res.getInt("status_cliente")));
             }
         } catch (SQLException e) {
             throw new BancoDeDadosException(e.getCause());

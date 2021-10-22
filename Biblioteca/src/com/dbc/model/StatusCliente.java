@@ -1,17 +1,26 @@
 package com.dbc.model;
 
+import java.util.Arrays;
+
 public enum StatusCliente {
-    OK("Tudo certo!"),
-    BLOQUEADO("Pagamento Pendente!"),
-    CANCELADO("Usuário Cancelado.");
+    OK(1),
+    BLOQUEADO(2),
+    CANCELADO(3);
 
-    private String descricao;
+    private Integer descricao;
 
-    StatusCliente(String descricao) {
+    StatusCliente(Integer descricao) {
         this.descricao = descricao;
     }
 
-    public String getDescricao() {
+    public Integer getDescricao() {
         return this.descricao;
+    }
+
+    public static StatusCliente ofStatus(Integer s) {
+        return Arrays.stream(StatusCliente.values())
+                .filter(statusCliente -> statusCliente.getDescricao().equals(s))
+                .findFirst()
+                .get();
     }
 }
