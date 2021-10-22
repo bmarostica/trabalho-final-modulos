@@ -9,12 +9,12 @@ import java.util.List;
 public class LivroService {
     private LivroRepository livroRepository;
 
-    public LivroService(LivroRepository livroRepository) {
-        this.livroRepository = livroRepository;
+    public LivroService() {
+        livroRepository = new LivroRepository();
     }
 
     //criação de objeto
-    public static void adicionar(Livro livro){
+    public void adicionar(Livro livro){
         try{
             Livro adicionarLivro = livroRepository.adicionar(livro);
             System.out.println(adicionarLivro);

@@ -11,7 +11,5 @@ W
 'src/com/dbc/teste/ContaClienteTest.java,b\a\ba50d362097f01e4db13470b4e5bbac8a554ded7
 M
 src/com/dbc/model/Idioma.java,0\3\03d8eda1c32ca357eb06a18ad4f13eebb31b023c
-L
-src/com/dbc/model/Livro.java,b\5\b5aa14b1501d6e7ec2696d6c964cbdbffdf48dfe
 R
 "src/com/dbc/model/StatusLivro.java,4\4\44bd6bf8c17719c2938e0d11071275b9be24cbaa
