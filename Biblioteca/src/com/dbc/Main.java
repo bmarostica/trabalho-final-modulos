@@ -13,19 +13,19 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         LivroService livroService = new LivroService();
 
-        int switchControl = -1;
+        int swichControl = -1;
 
         System.out.println("Selecione o item que deseja manipular: ");
         System.out.println("1 - Livro");
         System.out.println("2 - Cliente");
         System.out.println("3 - Funcionário");
         System.out.println("4 - Empréstimo");
-        switchControl = scanner.nextInt();
-        scanner.nextLine();
-        do{
-            try{
+        System.out.println("0 - Sair");
+        do {
+            try {
+                swichControl = scanner.nextInt();
+                scanner.nextLine();
                 int opcao = -5;
-
                 switch (opcao) {
                     case 1:
                         do {
@@ -303,9 +303,9 @@ public class Main {
                         break;
                 }
 
-            }catch (InputMismatchException e){
+            } catch (InputMismatchException e) {
                 System.err.println("Opção inválida");
             }
-        }while (switchControl < 0 || switchControl > 4);
+        } while (swichControl < 0 || swichControl > 4);
     }
 }
