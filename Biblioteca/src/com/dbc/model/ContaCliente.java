@@ -1,7 +1,5 @@
 package com.dbc.model;
 
-import com.dbc.Livro;
-
 public class ContaCliente implements PlanosDeAssinatura{
     private Integer idCliente;
     private String nome;
