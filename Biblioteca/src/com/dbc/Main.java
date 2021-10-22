@@ -13,7 +13,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         LivroService livroService = new LivroService();
 
-        int swichControl = -1;
+        int switchControl = -1;
 
         System.out.println("Selecione o item que deseja manipular: ");
         System.out.println("1 - Livro");
@@ -23,7 +23,7 @@ public class Main {
         System.out.println("0 - Sair");
         do {
             try {
-                swichControl = scanner.nextInt();
+                switchControl = scanner.nextInt();
                 scanner.nextLine();
                 int opcao = -5;
                 switch (opcao) {
@@ -306,6 +306,6 @@ public class Main {
             } catch (InputMismatchException e) {
                 System.err.println("Opção inválida");
             }
-        } while (swichControl < 0 || swichControl > 4);
+        } while (switchControl < 0 || switchControl > 4);
     }
 }
