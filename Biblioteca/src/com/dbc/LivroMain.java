@@ -1,76 +1,87 @@
 package com.dbc;
 
+import com.dbc.model.Formato;
+import com.dbc.model.Idioma;
+import com.dbc.model.Livro;
+import com.dbc.service.LivroService;
+
 import java.util.*;
 
-public class Livro {
-    Scanner input = new Scanner(System.in);
+public class LivroMain {
+    public static void main(String[] args) {
 
-    private static final String MENSAGEM_DE_ERRO = "Opção inválida!";
-
-    private Integer id;
-    private String titulo;
-    private String autor;
-    private String editora;
-    private Integer numeroDePaginas;
-    private Formato formato;
-    private Idioma idioma;
-    private List<Livro> livros = new ArrayList<>();
-
-    public Livro() {
-
-    }
-
-    public Livro(Integer id, String titulo, String autor, String editora, Integer numeroDePaginas, Formato formato, Idioma idioma) {
-        this.id = id;
-        this.titulo = titulo;
-        this.autor = autor;
-        this.editora = editora;
-        this.numeroDePaginas = numeroDePaginas;
-        this.formato = formato;
-        this.idioma = idioma;
-    }
-
-    public Livro cadastroDeLivro() {
-        Integer condicao = 0;
-
-        System.out.println("Para cadastrar um novo livro preencha os dados a seguir:");
-
-        setId(livros.size() + 1);
-        System.out.println("Título");
-        setTitulo(input.nextLine());
-        System.out.println("Autor");
-        setAutor(input.nextLine());
-        System.out.println("Editora");
-        setEditora(input.nextLine());
-        System.out.println("Número de Páginas");
-        setNumeroDePaginas(input.nextInt());
-        input.nextLine();
+        Scanner input = new Scanner(System.in);
+        int opcao = -1;
 
         do {
-            System.out.println("Informe o formato: 1 - para Brochura, 2 - para CapaDura");
-            condicao = input.nextInt();
-            input.nextLine();
-
-            if (condicao >= 1 && condicao <= 2) {
-                setFormato(Formato.values()[condicao - 1]);
-            } else {
-                System.err.println(MENSAGEM_DE_ERRO);
+            try {
+                System.out.println("Selecione uma das opções a seguir: ");
+                System.out.println("1 - Adicionar livro");
+                System.out.println("2 - Editar livro");
+                System.out.println("3 - Listar livros");
+                System.out.println("4 - Deletar livro");
+                System.out.println("0 - Sair");
+                opcao = input.nextInt();
+                input.nextLine();
+            } catch (NullPointerException e) {
+                e.getMessage();
             }
-        } while (condicao != 1 && condicao != 2);
+        } while (opcao < 0 && opcao > 4);
 
-        do {
-            System.out.println("Informe o Idioma: 1 - para PORTUGUÊS, 2 - para INGLÊS ou 3 - para ESPANHOL");
-            condicao = input.nextInt();
-            input.nextLine();
-            if (condicao >= 1 && condicao <= 3) {
-                setIdioma(Idioma.values()[condicao - 1]);
-            } else {
-                System.err.println(MENSAGEM_DE_ERRO);
-            }
-        } while (condicao != 1 && condicao != 2 && condicao != 3);
 
-        return new Livro(getId(), getTitulo(), getAutor(), getEditora(), getNumeroDePaginas(), getFormato(), getIdioma());
+        switch (opcao){
+            case 1:
+                Livro livro = new Livro();
+
+                System.out.println("Título");
+                livro.setTitulo(input.nextLine());
+                System.out.println("Autor");
+                livro.setAutor(input.nextLine());
+                System.out.println("Editora");
+                livro.setEditora(input.nextLine());
+                System.out.println("Número de Páginas");
+                livro.setNumeroDePaginas(input.nextInt());
+                input.nextLine();
+
+                do {
+                    System.out.println("Formato: 1 - para Brochura, 2 - para CapaDura");
+                    condicao = input.nextInt();
+                    input.nextLine();
+
+                    if (condicao >= 1 && condicao <= 2) {
+                        livro.setFormato(Formato.values()[condicao - 1]);
+                    } else {
+                        System.err.println(MENSAGEM_DE_ERRO);
+                    }
+                } while (condicao != 1 && condicao != 2);
+
+                do {
+                    System.out.println("Informe o Idioma: 1 - para PORTUGUÊS, 2 - para INGLÊS ou 3 - para ESPANHOL");
+                    condicao = input.nextInt();
+                    input.nextLine();
+                    if (condicao >= 1 && condicao <= 3) {
+                        livro.setIdioma(Idioma.values()[condicao - 1]);
+                    } else {
+                        System.err.println(MENSAGEM_DE_ERRO);
+                    }
+
+                LivroService.adicionarLivro(livro);
+                break;
+            case 2:
+                break;
+            case 3:
+                LivroService.listar();
+                break;
+            case 4:
+                break;
+            case 0:
+                break;
+        }
+
+
+
     }
+
 
     public void adicionarLivroNaBaseIteracao() {
         Integer condicao = 0;
@@ -92,13 +103,13 @@ public class Livro {
         System.out.println(livros);
     }
 
-    public void acidionarLivroNaBase(Livro livro) {
+    public void acidionarLivroNaBase(LivroMain livro) {
         this.livros.add(livro);
     }
 
-    public List<Livro> buscarLivro() {
+    public List<LivroMain> buscarLivro() {
         Integer condicao = 0;
-        List<Livro> lista = new ArrayList<>();
+        List<LivroMain> lista = new ArrayList<>();
 
         do {
             System.out.println("Informe o título: ");
@@ -126,8 +137,8 @@ public class Livro {
         return lista;
     }
 
-    public Livro buscarPorId(Integer id) {
-        Livro buscado = this.livros.stream()
+    public LivroMain buscarPorId(Integer id) {
+        LivroMain buscado = this.livros.stream()
                 .filter(livro -> livro.getId().equals(id))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Livro não encontrado"));
@@ -228,98 +239,5 @@ public class Livro {
         System.out.println(livros);
     }
 
-    public void deletarParaEmprestimo(Livro livro){
-        List<Livro> emprestados = new ArrayList<>();
-        livros.remove(livro);
-        emprestados.add(livro);
-    }
 
-    public void listarTodosLivrosCadastrados() {
-        for(Livro livro : this.livros) {
-            livro.imprimir();
-        }
-    }
-
-    public void imprimirBuscado(Livro buscado) {
-        System.out.println(buscado.getTitulo());
-    }
-
-    public void imprimir() {
-        System.out.println("Id: " + this.getId());
-        System.out.println("Titulo: " + this.getTitulo());
-        System.out.println("Autor: " + this.getAutor());
-        System.out.println("Editora: " + this.getEditora());
-        System.out.println("Número de páginas: " + this.getNumeroDePaginas());
-        System.out.println("Formato: " + this.getFormato());
-        System.out.println("Idioma: " + this.getIdioma());
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getAutor() {
-        return autor;
-    }
-
-    public void setAutor(String autor) {
-        this.autor = autor;
-    }
-
-    public String getEditora() {
-        return editora;
-    }
-
-    public void setEditora(String editora) {
-        this.editora = editora;
-    }
-
-    public Integer getNumeroDePaginas() {
-        return numeroDePaginas;
-    }
-
-    public void setNumeroDePaginas(Integer numeroDePaginas) {
-        this.numeroDePaginas = numeroDePaginas;
-    }
-
-    public Formato getFormato() {
-        return formato;
-    }
-
-    public void setFormato(Formato formato) {
-        this.formato = formato;
-    }
-
-    public Idioma getIdioma() {
-        return idioma;
-    }
-
-    public void setIdioma(Idioma idioma) {
-        this.idioma = idioma;
-    }
-
-    @Override
-    public String toString() {
-        return "Livro{" +
-                "id=" + id +
-                ", titulo='" + titulo + '\'' +
-                ", autor='" + autor + '\'' +
-                ", editora='" + editora + '\'' +
-                ", numeroDePaginas=" + numeroDePaginas +
-                ", formato=" + formato +
-                ", idioma=" + idioma +
-                '}';
-    }
 }
