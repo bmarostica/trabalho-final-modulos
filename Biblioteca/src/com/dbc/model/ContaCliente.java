@@ -1,6 +1,6 @@
 package com.dbc.model;
 
-public class ContaCliente implements PlanosDeAssinatura{
+public class ContaCliente{
     private Integer idCliente;
     private String nome;
     private String telefone;
@@ -99,13 +99,5 @@ public class ContaCliente implements PlanosDeAssinatura{
                 ", status=" + status +
                 ", pontos=" + pontosFidelidade +
                 '}';
-    }
-
-    @Override
-    public void cobrarMensalidade(double valor) {
-        ContaCliente cliente = new ContaCliente();
-        if(cliente.getPontosFidelidade() > 0) {
-            cliente.setPontosFidelidade((int) (cliente.getPontosFidelidade() - valor));
-        }
     }
 }

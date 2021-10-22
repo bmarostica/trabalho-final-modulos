@@ -14,7 +14,7 @@ public class LivroService {
     }
 
     //criação de objeto
-    public void adicionar(Livro livro){
+    public static void adicionar(Livro livro){
         try{
             Livro adicionarLivro = livroRepository.adicionar(livro);
             System.out.println(adicionarLivro);

@@ -2,13 +2,14 @@ package com.dbc.service;
 
 import com.dbc.exceptions.BancoDeDadosException;
 import com.dbc.model.ContaCliente;
+import com.dbc.model.PlanosDeAssinatura;
 import com.dbc.model.StatusCliente;
 import com.dbc.repository.ContaClienteRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContaClienteService {
+public class ContaClienteService  implements PlanosDeAssinatura {
     private List<ContaCliente> listaClientes = new ArrayList<>();
     private ContaClienteRepository contaClienteRepository;
 
@@ -18,9 +19,6 @@ public class ContaClienteService {
 
     public boolean podeAlugar(StatusCliente status) {
         return status.equals(StatusCliente.OK);
-    }
-
-    public void cobrarMensalidade(double valor) {
     }
 
     public void adicionarConta(ContaCliente conta) {
@@ -60,5 +58,11 @@ public class ContaClienteService {
         }
     }
 
-
+    @Override
+    public void cobrarMensalidade(double valor) {
+        ContaCliente cliente = new ContaCliente();
+        if(cliente.getPontosFidelidade() > 0) {
+            cliente.setPontosFidelidade((int) (cliente.getPontosFidelidade() - valor));
+        }
+    }
 }
