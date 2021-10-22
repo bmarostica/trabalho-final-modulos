@@ -2,6 +2,7 @@ package com.dbc;
 
 import com.dbc.model.*;
 import com.dbc.service.ContaClienteService;
+import com.dbc.service.EmprestimoService;
 import com.dbc.service.FuncionarioService;
 import com.dbc.service.LivroService;
 
@@ -11,7 +12,11 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
+        EmprestimoService emprestimoService = new EmprestimoService();
         LivroService livroService = new LivroService();
+        ContaClienteService contaService = new ContaClienteService();
+        FuncionarioService funcionarioService = new FuncionarioService();
 
         int switchControl = -1;
 
@@ -160,7 +165,6 @@ public class Main {
                         break;
 
                     case 2:
-                        ContaClienteService contaService = new ContaClienteService();
 
                         opcao = -1;
                         while (opcao != 0) {
@@ -231,15 +235,14 @@ public class Main {
 
 
                     case 3:
-                        FuncionarioService funcionarioService = new FuncionarioService();
 
-                        opcao = 0;
-                        while (opcao != 9) {
+                        opcao = -1;
+                        while (opcao != 0) {
                             System.out.println("Digite 1 para criar funcionário.");
                             System.out.println("Digite 2 para listar os funcionários.");
                             System.out.println("Digite 3 para editar um funcionário.");
                             System.out.println("Digite 4 para excluir um funcionário.");
-                            System.out.println("Digite 9 para sair.");
+                            System.out.println("Digite 0 para sair.");
                             opcao = scanner.nextInt();
                             scanner.nextLine();
                             switch (opcao) {
@@ -288,7 +291,7 @@ public class Main {
                                     funcionarioService.removerFuncionario(id);
                                     break;
                                 }
-                                case 9:
+                                case 0:
                                     break;
                                 default:
                                     System.err.println("Opção inválida!");
@@ -297,9 +300,56 @@ public class Main {
                         break;
 
                     case 4:
-                        break;
 
-                    case 0:
+                        opcao = -1;
+                        while (opcao != 0){
+                            System.out.println("Digite 1 para novo emprestimo.");
+                            System.out.println("Digite 2 para listar emprestimos.");
+                            System.out.println("Digite 3 para excluir emprestimo.");
+                            System.out.println("Digite 0 para sair.");
+                            opcao = scanner.nextInt();
+                            scanner.nextLine();
+                            switch (opcao) {
+                                case 1: {
+                                    Emprestimo emprestimo = new Emprestimo();
+                                    System.out.println("Digite o ID do livro.");
+                                    livroService.listar();
+                                    emprestimo.setIdLivroEmprestimo(scanner.nextInt());
+                                    scanner.nextLine();
+                                    System.out.println("Digite o ID do cliente");
+                                    contaService.listarContas();
+                                    emprestimo.setIdClienteEmprestimo(scanner.nextInt());
+                                    scanner.nextLine();
+                                    System.out.println("Digite o ID do funcionario.");
+                                    funcionarioService.listarFuncionarios();
+                                    emprestimo.setIdFuncionarioEmprestimo(scanner.nextInt());
+                                    scanner.nextLine();
+
+                                    emprestimoService.adicionarEmprestimoService(emprestimo);
+                                    break;
+                                }
+                                case 2: {
+                                    emprestimoService.listarEmprestimoService();
+                                    break;
+                                }
+                                case 3: {
+                                    System.out.println("Qual emprestimo deseja excluir?");
+                                    emprestimoService.listarEmprestimoService();
+                                    int id = scanner.nextInt();
+                                    scanner.nextLine();
+                                    emprestimoService.removerEmprestimoService(id);
+                                    break;
+                                }
+                                case 0:
+                                    break;
+                                default:
+                                    System.out.println("Opção inválida");
+                                    break;
+                            }
+                        }
+
+
+                     case 0:
                         break;
                 }
 
