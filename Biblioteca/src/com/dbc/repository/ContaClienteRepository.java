@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContaClienteRepository implements Repositorio<Integer, ContaCliente> {
+
     @Override
     public Integer getProximoId(Connection connection) throws SQLException {
         String sql = "SELECT seq_cliente.nextval mysequence from DUAL";
@@ -20,7 +21,6 @@ public class ContaClienteRepository implements Repositorio<Integer, ContaCliente
         if (res.next()) {
             return res.getInt("mysequence");
         }
-
         return null;
     }
 
@@ -34,7 +34,7 @@ public class ContaClienteRepository implements Repositorio<Integer, ContaCliente
             conta.setIdCliente(proximoId);
 
             String sql = "INSERT INTO CLIENTE\n" +
-                    "(ID_CLIENTE, NOME, TELEFONE, EMAIL, STATUS_CLIENTE, TIPO_CLIENTE) \n" +
+                    "(ID_CLIENTE, NOME, TELEFONE, EMAIL, STATUS_CLIENTE, TIPO_CLIENTE)\n" +
                     "VALUES(?, ?, ?, ?, ?, ?)\n";
 
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -44,7 +44,7 @@ public class ContaClienteRepository implements Repositorio<Integer, ContaCliente
             stmt.setString(3, conta.getTelefone());
             stmt.setString(4, conta.getEmail());
             stmt.setInt(5, conta.getStatus().getDescricao());
-            stmt.setInt(5, conta.getTipoCliente().getTipo());
+            stmt.setInt(6, conta.getTipoCliente().getTipo());
 
             int res = stmt.executeUpdate();
             System.out.println("adicionarConta.res=" + res);

@@ -31,7 +31,7 @@ public class Main {
                 switchControl = scanner.nextInt();
                 scanner.nextLine();
                 int opcao = -5;
-                switch (opcao) {
+                switch (switchControl) {
                     case 1:
                         do {
                             try {
@@ -176,7 +176,7 @@ public class Main {
                             opcao = scanner.nextInt();
                             scanner.nextLine();
                             switch (opcao) {
-                                case 1: {// adição
+                                case 1:
                                     ContaCliente conta = new ContaCliente();
                                     System.out.println("Digite o nome do Cliente");
                                     conta.setNome(scanner.nextLine());
@@ -187,14 +187,38 @@ public class Main {
                                     System.out.println("Digite o email");
                                     conta.setEmail(scanner.nextLine());
 
+                                    System.out.println("Tipo: 1 - para Comum, 2 - para Premium");
+                                    int variavel = 0;
+                                    do {
+                                        try {
+                                            variavel = scanner.nextInt();
+                                            conta.setTipoCliente(TipoCliente.ofTipo(variavel));
+                                            scanner.nextLine();
+                                        } catch (InputMismatchException e) {
+                                            System.err.println("Número inválido");
+                                        }
+                                    } while (variavel == 0);
+
+                                    System.out.println("Status: 1 - para OK, 2 - para Bloqueado, 3 para Cancelado");
+                                    variavel = 0;
+                                    do {
+                                        try {
+                                            variavel = scanner.nextInt();
+                                            conta.setStatus(StatusCliente.ofStatus(variavel));
+                                            scanner.nextLine();
+                                        } catch (InputMismatchException e) {
+                                            System.err.println("Número inválido");
+                                        }
+                                    } while (variavel == 0);
+
                                     contaService.adicionarConta(conta);
                                     break;
-                                }
-                                case 2: {
+
+                                case 2:
 
                                     contaService.listarContas();
                                     break;
-                                }
+
                                 case 3: {
 
                                     System.out.println("Qual conta você deseja editar?");
@@ -302,7 +326,7 @@ public class Main {
                     case 4:
 
                         opcao = -1;
-                        while (opcao != 0){
+                        while (opcao != 0) {
                             System.out.println("Digite 1 para novo emprestimo.");
                             System.out.println("Digite 2 para listar emprestimos.");
                             System.out.println("Digite 3 para excluir emprestimo.");
@@ -349,7 +373,7 @@ public class Main {
                         }
 
 
-                     case 0:
+                    case 0:
                         break;
                 }
 
