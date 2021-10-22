@@ -1,32 +1,34 @@
 package com.dbc;
 
 
+import com.dbc.model.ContaCliente;
+
 public class Emprestimo {
 
     private Livro livro;
-    private ContaClientePremium clientePremium;
+    private ContaCliente cliente;
     private Funcionario funcionario;
 
     public Emprestimo() {
     }
 
-    public Emprestimo(Livro livro, ContaClientePremium clientePremium, Funcionario funcionario) {
+    public Emprestimo(Livro livro, ContaCliente cliente, Funcionario funcionario) {
         this.livro = livro;
-        this.clientePremium = clientePremium;
+        this.cliente = cliente;
         this.funcionario = funcionario;
     }
 
     public void efetuarEmprestimo(Emprestimo emprestimo) {
         livro.acidionarLivroNaBase(emprestimo.livro);
-        emprestimo.clientePremium.setPontosFidelidade(emprestimo.clientePremium.getPontosFidelidade()+1);
+        emprestimo.cliente.setPontosFidelidade(emprestimo.cliente.getPontosFidelidade()+1);
         System.out.println("Funcionário: " + funcionario.getNomeFuncionario() + " alugou o livro "
-                        + livro.getTitulo() + " para o cliente:  " + clientePremium.getNome());
+                        + livro.getTitulo() + " para o cliente:  " + cliente.getNome());
     }
 
-    public void emprestimoClienteComum(Livro livro, Funcionario funcionario, ContaClienteComum clienteComum){
+    public void emprestimoClienteComum(Livro livro, Funcionario funcionario, ContaCliente clienteComum){
         livro.deletarParaEmprestimo(livro);
         System.out.println("Funcionário: " + funcionario.getNomeFuncionario() + " fez o emprestimo do livro: " + livro.getTitulo() +
-                ", a(o) cliente: " + clienteComum.getNome());
+                ", a(o) cliente: " + cliente.getNome());
     }
 
     public Livro getLivro() {
@@ -37,12 +39,12 @@ public class Emprestimo {
         this.livro = livro;
     }
 
-    public ContaClientePremium getClientePremium() {
-        return clientePremium;
+    public ContaCliente getClientePremium() {
+        return cliente;
     }
 
-    public void setClientePremium(ContaClientePremium clientePremium) {
-        this.clientePremium = clientePremium;
+    public void setClientePremium(ContaCliente clientePremium) {
+        this.cliente = clientePremium;
     }
 
     public Funcionario getFuncionario() {

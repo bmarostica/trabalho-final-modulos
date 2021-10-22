@@ -1,17 +1,28 @@
-package com.dbc;
+package com.dbc.model;
 
-import java.util.*;
+import com.dbc.Livro;
 
-public class ContaCliente {
+public class ContaCliente implements PlanosDeAssinatura{
     private Integer idCliente;
     private String nome;
     private String telefone;
     private String email;
     private Livro livro;
     private StatusCliente status;
+    private Integer pontosFidelidade;
 
     public ContaCliente(){
 
+    }
+
+    public ContaCliente(Integer idCliente, String nome, String telefone, String email, Livro livro, StatusCliente status, Integer pontosFidelidade) {
+        this.idCliente = idCliente;
+        this.nome = nome;
+        this.telefone = telefone;
+        this.email = email;
+        this.livro = livro;
+        this.status = status;
+        this.pontosFidelidade = pontosFidelidade;
     }
 
     public ContaCliente(Integer idCliente, String nome, String telefone, String email, StatusCliente status) {
@@ -22,25 +33,6 @@ public class ContaCliente {
         this.status = status;
     }
 
-    public boolean editarId(int novoId) {
-        if (novoId > 0) {
-            setIdCliente(novoId);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean podeAlugar(StatusCliente status) {
-        return status.equals(StatusCliente.OK);
-    }
-
-    public boolean editarTelefone(ContaCliente conta, String novoTelefone){
-        if (!Objects.equals(novoTelefone, conta.getTelefone())) {
-            conta.setTelefone(novoTelefone);
-            return true;
-        }
-        return false;
-    }
 
     public Integer getIdCliente() {
         return idCliente;
@@ -90,6 +82,14 @@ public class ContaCliente {
         this.status = status;
     }
 
+    public Integer getPontosFidelidade() {
+        return pontosFidelidade;
+    }
+
+    public void setPontosFidelidade(Integer pontosFidelidade) {
+        this.pontosFidelidade = pontosFidelidade;
+    }
+
     @Override
     public String toString() {
         return "ContaCliente{" +
@@ -99,6 +99,15 @@ public class ContaCliente {
                 ", email='" + email + '\'' +
                 ", livro=" + livro +
                 ", status=" + status +
+                ", pontos=" + pontosFidelidade +
                 '}';
+    }
+
+    @Override
+    public void cobrarMensalidade(double valor) {
+        ContaCliente cliente = new ContaCliente();
+        if(cliente.getPontosFidelidade() > 0) {
+            cliente.setPontosFidelidade((int) (cliente.getPontosFidelidade() - valor));
+        }
     }
 }
