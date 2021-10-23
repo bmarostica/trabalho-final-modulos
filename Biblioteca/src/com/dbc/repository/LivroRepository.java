@@ -47,7 +47,7 @@ public class LivroRepository implements Repositorio<Integer, Livro> {
             stmt.setInt(8, livro.getStatusLivro().getStatusLivro());
 
             int res = stmt.executeUpdate();
-            System.out.println("adicionarLivro.res" + res);
+            System.out.println("Livro adicionado com sucesso!");
             return livro;
         } catch (SQLException e) {
             throw new BancoDeDadosException(e.getCause());
@@ -68,7 +68,7 @@ public class LivroRepository implements Repositorio<Integer, Livro> {
         try {
             con = ConexaoBancoDeDados.getConnection();
 
-            String sql = "DELETE FROM CONTATO WHERE ID_LIVRO = ?";
+            String sql = "DELETE FROM LIVRO WHERE ID_LIVRO = ?";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
@@ -99,6 +99,8 @@ public class LivroRepository implements Repositorio<Integer, Livro> {
             StringBuilder sql = new StringBuilder();
             PreparedStatement stmt = con.prepareStatement(sql.toString());
 
+
+
             int cont = 1;
             if (livro != null) {
                 if (livro.getIdLivro() != null) {
@@ -122,9 +124,6 @@ public class LivroRepository implements Repositorio<Integer, Livro> {
             }
             if (livro.getIdioma() != null) {
                 stmt.setInt(cont++, livro.getIdioma().getLingua());
-            }
-            if (livro.getStatusLivro() != null) {
-                stmt.setInt(cont++, livro.getStatusLivro().getStatusLivro());
             }
 
             stmt.setInt(cont++, id);
@@ -154,7 +153,7 @@ public class LivroRepository implements Repositorio<Integer, Livro> {
             con = ConexaoBancoDeDados.getConnection();
             Statement stmt = con.createStatement();
 
-            String sql = "SELECT * FROM PESSOA";
+            String sql = "SELECT * FROM LIVRO";
 
             ResultSet res = stmt.executeQuery(sql);
 
@@ -167,7 +166,7 @@ public class LivroRepository implements Repositorio<Integer, Livro> {
                 livro.setNumeroDePaginas(res.getInt("nr_paginas"));
                 livro.setFormato(Formato.ofFormato(res.getInt("formato")));
                 livro.setIdioma(Idioma.ofIdioma(res.getInt("idioma")));
-                livro.setStatusLivro(StatusLivro.ofStatus(res.getInt("status")));
+                livro.setStatusLivro(StatusLivro.ofStatus(res.getInt("status_livro")));
             }
         } catch (SQLException e) {
             throw new BancoDeDadosException(e.getCause());
