@@ -48,7 +48,6 @@ public class Main {
                                 }
                             } while (opcao < 0 && opcao > 4);
 
-
                             do {
                                 try {
                                     switch (opcao) {
@@ -64,7 +63,6 @@ public class Main {
 
                                             do {
                                                 System.out.println("Número de Páginas");
-                                                ;
                                                 try {
                                                     livro.setNumeroDePaginas(scanner.nextInt());
                                                 } catch (InputMismatchException e) {

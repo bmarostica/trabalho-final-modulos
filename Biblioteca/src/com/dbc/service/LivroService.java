@@ -47,7 +47,7 @@ public class LivroService {
     public void remover(Integer id){
         try{
             boolean conseguiuDeletarLivro = livroRepository.remover(id);
-            System.out.println("Livro excluido com sucesso? " + conseguiuDeletarLivro + "id = " + id);
+            System.out.println("Livro excluido com sucesso? " + conseguiuDeletarLivro + " id = " + id);
         }catch (BancoDeDadosException e){
             e.printStackTrace();
         }

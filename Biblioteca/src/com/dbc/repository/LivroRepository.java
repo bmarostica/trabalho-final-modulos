@@ -75,7 +75,7 @@ public class LivroRepository implements Repositorio<Integer, Livro> {
             stmt.setInt(1, id);
 
             int res = stmt.executeUpdate();
-            System.out.println("removerLivroPorId.res=" + res);
+            //System.out.println("Livro deletado com sucesso!" + res);
 
             return res > 0;
         } catch (SQLException e) {
@@ -97,39 +97,27 @@ public class LivroRepository implements Repositorio<Integer, Livro> {
         try {
             con = ConexaoBancoDeDados.getConnection();
             StringBuilder sql = new StringBuilder();
+
+            sql.append("UPDATE LIVRO SET ");
+            sql.append(" titulo = ?,");
+            sql.append(" autor = ?,");
+            sql.append(" editora = ?,");
+            sql.append(" nr_paginas = ?,");
+            sql.append(" formato = ?,");
+            sql.append(" idioma = ? ");
+            sql.append(" WHERE ID_LIVRO = ? ");
+
             PreparedStatement stmt = con.prepareStatement(sql.toString());
 
-
-
-            int cont = 1;
-            if (livro != null) {
-                if (livro.getIdLivro() != null) {
-                    stmt.setInt(cont++, livro.getIdLivro());
-                }
-            }
-            if (livro.getTitulo() != null) {
-                stmt.setString(cont++, livro.getTitulo());
-            }
-            if (livro.getAutor() != null) {
-                stmt.setString(cont++, livro.getAutor());
-            }
-            if (livro.getEditora() != null) {
-                stmt.setString(cont++, livro.getEditora());
-            }
-            if (livro.getNumeroDePaginas() != null) {
-                stmt.setInt(cont++, livro.getNumeroDePaginas());
-            }
-            if (livro.getFormato() != null) {
-                stmt.setInt(cont++, livro.getFormato().getTipo());
-            }
-            if (livro.getIdioma() != null) {
-                stmt.setInt(cont++, livro.getIdioma().getLingua());
-            }
-
-            stmt.setInt(cont++, id);
+            stmt.setString(1, livro.getTitulo());
+            stmt.setString(2, livro.getAutor());
+            stmt.setString(3, livro.getEditora());
+            stmt.setInt(4, livro.getNumeroDePaginas());
+            stmt.setInt(5, livro.getFormato().getTipo());
+            stmt.setInt(6, livro.getIdioma().getLingua());
 
             int res = stmt.executeUpdate();
-            System.out.println("editarLivro.res=" + res);
+            System.out.println("Livro editado com sucesso!" + res);
 
             return res > 0;
         } catch (SQLException e) {
@@ -167,6 +155,7 @@ public class LivroRepository implements Repositorio<Integer, Livro> {
                 livro.setFormato(Formato.ofFormato(res.getInt("formato")));
                 livro.setIdioma(Idioma.ofIdioma(res.getInt("idioma")));
                 livro.setStatusLivro(StatusLivro.ofStatus(res.getInt("status_livro")));
+                livros.add(livro);
             }
         } catch (SQLException e) {
             throw new BancoDeDadosException(e.getCause());
