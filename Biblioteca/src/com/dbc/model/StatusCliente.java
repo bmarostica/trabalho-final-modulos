@@ -17,9 +17,9 @@ public enum StatusCliente {
         return this.descricao;
     }
 
-    public static StatusCliente ofStatus(Integer s) {
+    public static StatusCliente ofStatus(Integer sl) {
         return Arrays.stream(StatusCliente.values())
-                .filter(statusCliente -> statusCliente.getDescricao().equals(s))
+                .filter(statusCliente -> statusCliente.getDescricao().equals(sl))
                 .findFirst()
                 .get();
     }

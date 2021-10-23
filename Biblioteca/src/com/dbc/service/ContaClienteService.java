@@ -33,7 +33,7 @@ public class ContaClienteService  implements PlanosDeAssinatura {
     public void removerConta(Integer id) {
         try {
             boolean conseguiuRemover = contaClienteRepository.remover(id);
-            System.out.println("conta removida? " + conseguiuRemover + "| com id=" + id);
+            System.out.println("conta removida. " + conseguiuRemover + "id:" + id);
         } catch (BancoDeDadosException e) {
             e.printStackTrace();
         }

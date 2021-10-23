@@ -33,13 +33,13 @@ public class ContaCliente{
         this.status = status;
     }
 
-    public ContaCliente(Integer idCliente, TipoCliente tipoCliente, String nome, String telefone, String email, StatusCliente status) {
+    public ContaCliente(Integer idCliente, String nome, String telefone, String email, StatusCliente status, TipoCliente tipoCliente) {
         this.idCliente = idCliente;
-        this.tipoCliente = tipoCliente;
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
         this.status = status;
+        this.tipoCliente = tipoCliente;
     }
 
 
@@ -111,7 +111,7 @@ public class ContaCliente{
     public String toString() {
         return "ContaCliente{" +
                 "idCliente=" + idCliente +
-                "Tipo do Cliente: " + tipoCliente +
+                ", Tipo do Cliente: " + tipoCliente +
                 ", nome='" + nome + '\'' +
                 ", telefone='" + telefone + '\'' +
                 ", email='" + email + '\'' +

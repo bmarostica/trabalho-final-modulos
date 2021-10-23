@@ -68,7 +68,7 @@ public class ContaClienteRepository implements Repositorio<Integer, ContaCliente
         try {
             con = ConexaoBancoDeDados.getConnection();
 
-            String sql = "DELETE FROM CONTA WHERE id_cliente = ?";
+            String sql = "DELETE FROM CLIENTE WHERE id_cliente = ?";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
@@ -97,32 +97,29 @@ public class ContaClienteRepository implements Repositorio<Integer, ContaCliente
         Connection con = null;
         try {
             con = ConexaoBancoDeDados.getConnection();
-
             StringBuilder sql = new StringBuilder();
-            sql.append("UPDATE CONTA SET ");
-            sql.append(" id = ?,");
+            sql.append("UPDATE CLIENTE SET ");
             sql.append(" nome = ?,");
-            sql.append(" telefone = ? ");
-            sql.append(" email = ? ");
-            sql.append(" status ? ");
-            sql.append(" tipo ?");
-            sql.append(" WHERE id_cliente = ? ");
+            sql.append(" telefone = ?,");
+            sql.append(" email = ?,");
+            sql.append(" status_cliente = ?,");
+            sql.append(" tipo_cliente = ?");
+            sql.append(" WHERE id_cliente = ?");
 
             PreparedStatement stmt = con.prepareStatement(sql.toString());
 
-            stmt.setInt(1, conta.getIdCliente());
-            stmt.setString(2, conta.getNome());
-            stmt.setString(3, conta.getTelefone());
-            stmt.setString(4, conta.getEmail());
-            stmt.setInt(5, conta.getStatus().getDescricao());
-            stmt.setInt(6, conta.getTipoCliente().getTipo());
-
-
+            stmt.setString(1, conta.getNome());
+            stmt.setString(2, conta.getTelefone());
+            stmt.setString(3, conta.getEmail());
+            stmt.setInt(4, conta.getStatus().getDescricao());
+            stmt.setInt(5, conta.getTipoCliente().getTipo());
+            stmt.setInt(6, id);
 
             int res = stmt.executeUpdate();
             System.out.println("editarConta.res=" + res);
 
             return res > 0;
+
         } catch (SQLException e) {
             throw new BancoDeDadosException(e.getCause());
         } finally {
@@ -144,8 +141,7 @@ public class ContaClienteRepository implements Repositorio<Integer, ContaCliente
             con = ConexaoBancoDeDados.getConnection();
             Statement stmt = con.createStatement();
 
-            String sql = "SELECT * FROM CONTA";
-
+            String sql = "SELECT * FROM CLIENTE ORDER BY ID_CLIENTE";
 
             ResultSet res = stmt.executeQuery(sql);
 
@@ -156,7 +152,8 @@ public class ContaClienteRepository implements Repositorio<Integer, ContaCliente
                 conta.setTelefone(res.getString("telefone"));
                 conta.setEmail(res.getString("email"));
                 conta.setStatus(StatusCliente.ofStatus(res.getInt("status_cliente")));
-                conta.setTipoCliente(TipoCliente.ofTipo(res.getInt("status_cliente")));
+                conta.setTipoCliente(TipoCliente.ofTipo(res.getInt("tipo_cliente")));
+                contas.add(conta);
             }
         } catch (SQLException e) {
             throw new BancoDeDadosException(e.getCause());
