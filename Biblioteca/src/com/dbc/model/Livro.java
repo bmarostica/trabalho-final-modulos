@@ -8,7 +8,7 @@ public class Livro {
     private Integer numeroDePaginas;
     private Formato formato;
     private Idioma idioma;
-    private StatusLivro statusLivro; //definir status disponivel como padrão
+    private StatusLivro statusLivro;
 
     public Livro() {
 

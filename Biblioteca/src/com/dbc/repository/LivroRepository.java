@@ -75,7 +75,6 @@ public class LivroRepository implements Repositorio<Integer, Livro> {
             stmt.setInt(1, id);
 
             int res = stmt.executeUpdate();
-            //System.out.println("Livro deletado com sucesso!" + res);
 
             return res > 0;
         } catch (SQLException e) {
@@ -97,7 +96,6 @@ public class LivroRepository implements Repositorio<Integer, Livro> {
         try {
             con = ConexaoBancoDeDados.getConnection();
             StringBuilder sql = new StringBuilder();
-
             sql.append("UPDATE LIVRO SET ");
             sql.append(" titulo = ?,");
             sql.append(" autor = ?,");
@@ -115,6 +113,7 @@ public class LivroRepository implements Repositorio<Integer, Livro> {
             stmt.setInt(4, livro.getNumeroDePaginas());
             stmt.setInt(5, livro.getFormato().getTipo());
             stmt.setInt(6, livro.getIdioma().getLingua());
+            stmt.setInt(7, id);
 
             int res = stmt.executeUpdate();
             System.out.println("Livro editado com sucesso!" + res);

@@ -109,7 +109,6 @@ public class Main {
                                             scanner.nextLine();
 
                                             Livro livroEdicao = new Livro();
-
                                             System.out.println("Título");
                                             livroEdicao.setTitulo(scanner.nextLine());
                                             System.out.println("Autor");
@@ -118,7 +117,6 @@ public class Main {
                                             livroEdicao.setEditora(scanner.nextLine());
                                             do {
                                                 System.out.println("Número de Páginas");
-                                                ;
                                                 try {
                                                     livroEdicao.setNumeroDePaginas(scanner.nextInt());
                                                 } catch (InputMismatchException e) {
