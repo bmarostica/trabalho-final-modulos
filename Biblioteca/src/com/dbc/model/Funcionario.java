@@ -37,4 +37,14 @@ public class Funcionario {
     public void setEmailFuncionario(String emailFuncionario) {
         this.emailFuncionario = emailFuncionario;
     }
+
+    @Override
+    public String toString() {
+        return "Funcionario{" +
+                "idFuncionario=" + idFuncionario +
+                ", nomeFuncionario='" + nomeFuncionario + '\'' +
+                ", telFuncionario='" + telFuncionario + '\'' +
+                ", emailFuncionario='" + emailFuncionario + '\'' +
+                '}';
+    }
 }

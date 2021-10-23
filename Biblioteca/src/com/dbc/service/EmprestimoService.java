@@ -39,4 +39,21 @@ public class EmprestimoService {
             e.printStackTrace();
         }
     }
+    public void livroIndisponivelService(Integer idLivro) {
+        try {
+            boolean trocouStatus = emprestimoRepository.livroIndisponivel(idLivro);
+            System.out.println("Status do livro mudou para indisponivel? " + trocouStatus + "| com id=" + idLivro);
+        } catch (BancoDeDadosException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void livroDisponivelService(Integer idLivro) {
+        try {
+            boolean trocouStatus = emprestimoRepository.livroDisponivel(idLivro);
+            System.out.println("Status do livro mudou disponivel? " + trocouStatus + "| com id=" + idLivro);
+        } catch (BancoDeDadosException e) {
+            e.printStackTrace();
+        }
+    }
 }

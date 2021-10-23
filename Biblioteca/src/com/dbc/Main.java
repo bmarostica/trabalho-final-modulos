@@ -376,6 +376,7 @@ public class Main {
                                 System.out.println("Digite 1 para novo emprestimo.");
                                 System.out.println("Digite 2 para listar emprestimos.");
                                 System.out.println("Digite 3 para excluir emprestimo.");
+                                System.out.println("Digite 4 para devolver livro.");
                                 System.out.println("Digite 0 para sair.");
                                 opcao = scanner.nextInt();
                                 scanner.nextLine();
@@ -384,8 +385,9 @@ public class Main {
                                         Emprestimo emprestimo = new Emprestimo();
                                         System.out.println("Digite o ID do livro.");
                                         livroService.listar();
-                                        emprestimo.setIdLivroEmprestimo(scanner.nextInt());
+                                        int idLivro = scanner.nextInt();
                                         scanner.nextLine();
+                                        emprestimo.setIdLivroEmprestimo(idLivro);
                                         System.out.println("Digite o ID do cliente");
                                         contaService.listarContas();
                                         emprestimo.setIdClienteEmprestimo(scanner.nextInt());
@@ -396,6 +398,7 @@ public class Main {
                                         scanner.nextLine();
 
                                         emprestimoService.adicionarEmprestimoService(emprestimo);
+                                        emprestimoService.livroIndisponivelService(idLivro);
                                         break;
                                     }
                                     case 2: {
@@ -408,6 +411,14 @@ public class Main {
                                         int id = scanner.nextInt();
                                         scanner.nextLine();
                                         emprestimoService.removerEmprestimoService(id);
+                                        break;
+                                    }
+                                    case 4: {
+                                        System.out.println("Digite o id do livro devolvido.");
+                                        emprestimoService.listarEmprestimoService();
+                                        int idLivro = scanner.nextInt();
+                                        scanner.nextLine();
+                                        emprestimoService.livroDisponivelService(idLivro);
                                         break;
                                     }
                                     case 0:

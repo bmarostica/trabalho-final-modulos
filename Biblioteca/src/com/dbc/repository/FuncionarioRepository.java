@@ -93,7 +93,7 @@ public class FuncionarioRepository implements Repositorio<Integer, Funcionario>{
             con = ConexaoBancoDeDados.getConnection();
 
             StringBuilder sql = new StringBuilder();
-            sql.append("UPDATE PESSOA SET ");
+            sql.append("UPDATE FUNCIONARIO SET ");
             sql.append(" nome = ?,");
             sql.append(" telefone = ?,");
             sql.append(" email = ? ");

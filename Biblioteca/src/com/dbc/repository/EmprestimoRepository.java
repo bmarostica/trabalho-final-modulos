@@ -117,4 +117,56 @@ public class EmprestimoRepository {
             }
         }
     }
+    public boolean livroIndisponivel(Integer idLivro) throws BancoDeDadosException {
+        Connection con = null;
+        try {
+            con = ConexaoBancoDeDados.getConnection();
+
+            String sql = "UPDATE LIVRO SET STATUS_LIVRO = 2 WHERE ID_LIVRO = ?";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, idLivro);
+
+            int res = stmt.executeUpdate();
+            System.out.println("statusIndisponivel=" + res);
+
+            return res > 0;
+        } catch (SQLException e) {
+            throw new BancoDeDadosException(e.getCause());
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            }catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public boolean livroDisponivel(Integer idLivro) throws BancoDeDadosException {
+        Connection con = null;
+        try {
+            con = ConexaoBancoDeDados.getConnection();
+
+            String sql = "UPDATE LIVRO SET STATUS_LIVRO = 1 WHERE ID_LIVRO = ?";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, idLivro);
+
+            int res = stmt.executeUpdate();
+            System.out.println("statusDisponivel=" + res);
+
+            return res > 0;
+        } catch (SQLException e) {
+            throw new BancoDeDadosException(e.getCause());
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            }catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

@@ -37,4 +37,14 @@ public class Emprestimo {
     public void setIdFuncionarioEmprestimo(Integer idFuncionarioEmprestimo) {
         this.idFuncionarioEmprestimo = idFuncionarioEmprestimo;
     }
+
+    @Override
+    public String toString() {
+        return "Emprestimo{" +
+                "idEmprestimo=" + idEmprestimo +
+                ", idClienteEmprestimo=" + idClienteEmprestimo +
+                ", idLivroEmprestimo=" + idLivroEmprestimo +
+                ", idFuncionarioEmprestimo=" + idFuncionarioEmprestimo +
+                '}';
+    }
 }
