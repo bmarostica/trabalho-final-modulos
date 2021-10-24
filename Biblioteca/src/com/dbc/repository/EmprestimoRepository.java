@@ -64,7 +64,15 @@ public class EmprestimoRepository {
             con = ConexaoBancoDeDados.getConnection();
             Statement stmt = con.createStatement();
 
-            String sql = "SELECT * FROM EMPRESTIMO";
+            String sql = "SELECT E.*,\n"+
+                            "L.TITULO AS TITULO_LIVRO,\n"+
+                            "C.NOME AS CLIENTE_NOME,\n"+
+                            "F.NOME AS FUNCIONARIO_NOME\n"+
+                            "FROM EMPRESTIMO E\n"+
+                            "LEFT JOIN LIVRO L ON (L.ID_LIVRO = E.ID_LIVRO)\n"+
+                            "LEFT JOIN CLIENTE C ON (C.ID_CLIENTE = E.ID_CLIENTE)\n"+
+                            "LEFT JOIN FUNCIONARIO F ON (F.ID_FUNCIONARIO = E.ID_FUNCIONARIO)";
+
 
             ResultSet res = stmt.executeQuery(sql);
 
@@ -74,6 +82,9 @@ public class EmprestimoRepository {
                 emprestimo.setIdLivroEmprestimo(res.getInt("id_livro"));
                 emprestimo.setIdClienteEmprestimo(res.getInt("id_cliente"));
                 emprestimo.setIdFuncionarioEmprestimo(res.getInt("id_funcionario"));
+                emprestimo.setTituloLivroEmprestimo(res.getString("titulo_livro"));
+                emprestimo.setNomeClienteEmprestimo(res.getString("cliente_nome"));
+                emprestimo.setNomeFuncionarioEmprestimo(res.getString("funcionario_nome"));
                 emprestimos.add(emprestimo);
             }
         }  catch (SQLException e) {

@@ -5,6 +5,9 @@ public class Emprestimo {
     private Integer idClienteEmprestimo;
     private Integer idLivroEmprestimo;
     private Integer idFuncionarioEmprestimo;
+    private String tituloLivroEmprestimo;
+    private String nomeClienteEmprestimo;
+    private String nomeFuncionarioEmprestimo;
 
     public Integer getIdEmprestimo() {
         return idEmprestimo;
@@ -38,13 +41,40 @@ public class Emprestimo {
         this.idFuncionarioEmprestimo = idFuncionarioEmprestimo;
     }
 
+    public String getTituloLivroEmprestimo() {
+        return tituloLivroEmprestimo;
+    }
+
+    public void setTituloLivroEmprestimo(String tituloLivroEmprestimo) {
+        this.tituloLivroEmprestimo = tituloLivroEmprestimo;
+    }
+
+    public String getNomeClienteEmprestimo() {
+        return nomeClienteEmprestimo;
+    }
+
+    public void setNomeClienteEmprestimo(String nomeClienteEmprestimo) {
+        this.nomeClienteEmprestimo = nomeClienteEmprestimo;
+    }
+
+    public String getNomeFuncionarioEmprestimo() {
+        return nomeFuncionarioEmprestimo;
+    }
+
+    public void setNomeFuncionarioEmprestimo(String nomeFuncionarioEmprestimo) {
+        this.nomeFuncionarioEmprestimo = nomeFuncionarioEmprestimo;
+    }
+
     @Override
     public String toString() {
         return "Emprestimo{" +
                 "idEmprestimo=" + idEmprestimo +
-                ", idClienteEmprestimo=" + idClienteEmprestimo +
-                ", idLivroEmprestimo=" + idLivroEmprestimo +
-                ", idFuncionarioEmprestimo=" + idFuncionarioEmprestimo +
+                ", idCliente=" + idClienteEmprestimo +
+                ", idLivro=" + idLivroEmprestimo +
+                ", idFuncionario=" + idFuncionarioEmprestimo +
+                ", tituloLivro='" + tituloLivroEmprestimo + '\'' +
+                ", nomeCliente='" + nomeClienteEmprestimo + '\'' +
+                ", nomeFuncionario='" + nomeFuncionarioEmprestimo + '\'' +
                 '}';
     }
 }
