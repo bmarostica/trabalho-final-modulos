@@ -31,160 +31,166 @@ public class Main {
                 try {
                     switchControl = scanner.nextInt();
                     scanner.nextLine();
-                    int opcao = 0;
+                    int opcao = -1;
+
                     switch (switchControl) {
                         case 1:
-                            do {
-                                try {
-                                    System.out.println("Selecione uma das opções a seguir: ");
-                                    System.out.println("1 - Adicionar livro");
-                                    System.out.println("2 - Editar livro");
-                                    System.out.println("3 - Listar livros");
-                                    System.out.println("4 - Deletar livro");
-                                    opcao = scanner.nextInt();
-                                    scanner.nextLine();
-                                } catch (NullPointerException e) {
-                                    System.err.println("Opção inválida");
-                                }
-                            } while (opcao < 0 && opcao > 4);
-
-                            do {
-                                try {
-                                    switch (opcao) {
-                                        case 1:
-                                            Livro livro = new Livro();
-
-                                            System.out.println("Título");
-                                            livro.setTitulo(scanner.nextLine());
-                                            System.out.println("Autor");
-                                            livro.setAutor(scanner.nextLine());
-                                            System.out.println("Editora");
-                                            livro.setEditora(scanner.nextLine());
-
-                                            do {
-                                                System.out.println("Número de Páginas");
-                                                try {
-                                                    livro.setNumeroDePaginas(scanner.nextInt());
-                                                } catch (InputMismatchException e) {
-                                                    System.err.println("Número inválido");
-                                                }
-                                                scanner.nextLine();
-                                            } while (livro.getNumeroDePaginas() == null);
-
-                                            int variavel = 0;
-                                            do {
-                                                System.out.println("Formato: 1 - para Brochura, 2 - para CapaDura");
-                                                try {
-                                                    variavel = scanner.nextInt();
-                                                    livro.setFormato(Formato.ofFormato(variavel));
-                                                } catch (InputMismatchException e) {
-                                                    System.err.println("Número inválido");
-                                                } catch (NoSuchElementException ex) {
-                                                    System.err.println("Número inválido");
-                                                }
-                                                scanner.nextLine();
-                                            } while (variavel != 1 && variavel != 2);
-
-                                            variavel = 0;
-                                            do {
-                                                System.out.println("Informe o Idioma: 1 - para PORTUGUÊS, 2 - para INGLÊS ou 3 - para ESPANHOL");
-                                                try {
-                                                    variavel = scanner.nextInt();
-                                                    livro.setIdioma(Idioma.ofIdioma(variavel));
-
-                                                } catch (InputMismatchException e) {
-                                                    System.err.println("Número inválido");
-                                                }
-                                                scanner.nextLine();
-                                            } while (variavel != 1 && variavel != 2 && variavel != 3);
-
-                                            livro.setStatusLivro(StatusLivro.DISPONIVEL);
-                                            livroService.adicionar(livro);
-                                            break;
-
-                                        case 2:
-                                            System.out.println("Qual livro deve ser alterado?");
-                                            livroService.listar();
-                                            int id = scanner.nextInt();
+                            try {
+                                while (opcao != 0) {
+                                    do {
+                                        try {
+                                            System.out.println("Selecione uma das opções a seguir: ");
+                                            System.out.println("1 - Adicionar livro");
+                                            System.out.println("2 - Editar livro");
+                                            System.out.println("3 - Listar livros");
+                                            System.out.println("4 - Deletar livro");
+                                            System.out.println("0 - Sair");
+                                            opcao = scanner.nextInt();
                                             scanner.nextLine();
-
-                                            Livro livroEdicao = new Livro();
-                                            System.out.println("Título");
-                                            livroEdicao.setTitulo(scanner.nextLine());
-                                            System.out.println("Autor");
-                                            livroEdicao.setAutor(scanner.nextLine());
-                                            System.out.println("Editora");
-                                            livroEdicao.setEditora(scanner.nextLine());
-                                            do {
-                                                System.out.println("Número de Páginas");
-                                                try {
-                                                    livroEdicao.setNumeroDePaginas(scanner.nextInt());
-                                                } catch (InputMismatchException e) {
-                                                    System.err.println("Número inválido");
-                                                }
-                                                scanner.nextLine();
-                                            } while (livroEdicao.getNumeroDePaginas() == null);
-
-                                            variavel = 0;
-                                            do {
-                                                System.out.println("Formato: 1 - para Brochura, 2 - para CapaDura");
-                                                try {
-                                                    variavel = scanner.nextInt();
-                                                    livroEdicao.setFormato(Formato.ofFormato(variavel));
-                                                } catch (InputMismatchException e) {
-                                                    System.err.println("Número inválido");
-                                                } catch (NoSuchElementException ex) {
-                                                    System.err.println("Número inválido");
-                                                }
-                                                scanner.nextLine();
-                                            } while (variavel != 1 && variavel != 2);
-
-                                            variavel = 0;
-                                            do {
-                                                System.out.println("Informe o Idioma: 1 - para PORTUGUÊS, 2 - para INGLÊS ou 3 - para ESPANHOL");
-                                                try {
-                                                    variavel = scanner.nextInt();
-                                                    livroEdicao.setIdioma(Idioma.ofIdioma(variavel));
-
-                                                } catch (InputMismatchException e) {
-                                                    System.err.println("Número inválido");
-                                                }
-                                                scanner.nextLine();
-                                            } while (variavel != 1 && variavel != 2 && variavel != 3);
-
-                                            livroService.editar(id, livroEdicao);
-
-                                            break;
-                                        case 3:
-                                            livroService.listar();
-                                            break;
-                                        case 4:
-                                            System.out.println("Informe o livro o qual você deseja excluir ");
-                                            livroService.listar();
-                                            boolean validou = false;
-                                            while (!validou) {
-                                                try {
-                                                    id = scanner.nextInt();
-                                                    livroService.remover(id);
-                                                    validou = true;
-                                                } catch (InputMismatchException e) {
-                                                    System.err.println("Registro inválido");
-                                                }
-                                            }
-                                            break;
-                                        case 0:
-                                            break;
-                                        default:
+                                        } catch (NullPointerException e) {
                                             System.err.println("Opção inválida");
-                                            break;
-                                    }
-                                } catch (InputMismatchException e) {
-                                    System.err.println("Opção inválida");
+                                        }
+                                    } while (opcao < 0 && opcao > 4);
+
+                                    do {
+                                        try {
+                                            switch (opcao) {
+                                                case 1:
+                                                    Livro livro = new Livro();
+
+                                                    System.out.println("Título");
+                                                    livro.setTitulo(scanner.nextLine());
+                                                    System.out.println("Autor");
+                                                    livro.setAutor(scanner.nextLine());
+                                                    System.out.println("Editora");
+                                                    livro.setEditora(scanner.nextLine());
+
+                                                    do {
+                                                        System.out.println("Número de Páginas");
+                                                        try {
+                                                            livro.setNumeroDePaginas(scanner.nextInt());
+                                                        } catch (InputMismatchException e) {
+                                                            System.err.println("Número inválido");
+                                                        }
+                                                        scanner.nextLine();
+                                                    } while (livro.getNumeroDePaginas() == null);
+
+                                                    int variavel = 0;
+                                                    do {
+                                                        System.out.println("Formato: 1 - para Brochura, 2 - para CapaDura");
+                                                        try {
+                                                            variavel = scanner.nextInt();
+                                                            livro.setFormato(Formato.ofFormato(variavel));
+                                                        } catch (InputMismatchException e) {
+                                                            System.err.println("Número inválido");
+                                                        } catch (NoSuchElementException ex) {
+                                                            System.err.println("Número inválido");
+                                                        }
+                                                        scanner.nextLine();
+                                                    } while (variavel != 1 && variavel != 2);
+
+                                                    variavel = 0;
+                                                    do {
+                                                        System.out.println("Informe o Idioma: 1 - para PORTUGUÊS, 2 - para INGLÊS ou 3 - para ESPANHOL");
+                                                        try {
+                                                            variavel = scanner.nextInt();
+                                                            livro.setIdioma(Idioma.ofIdioma(variavel));
+
+                                                        } catch (InputMismatchException e) {
+                                                            System.err.println("Número inválido");
+                                                        }
+                                                        scanner.nextLine();
+                                                    } while (variavel != 1 && variavel != 2 && variavel != 3);
+
+                                                    livro.setStatusLivro(StatusLivro.DISPONIVEL);
+                                                    livroService.adicionar(livro);
+                                                    break;
+
+                                                case 2:
+                                                    System.out.println("Qual livro deve ser alterado?");
+                                                    livroService.listar();
+                                                    int id = scanner.nextInt();
+                                                    scanner.nextLine();
+
+                                                    Livro livroEdicao = new Livro();
+                                                    System.out.println("Título");
+                                                    livroEdicao.setTitulo(scanner.nextLine());
+                                                    System.out.println("Autor");
+                                                    livroEdicao.setAutor(scanner.nextLine());
+                                                    System.out.println("Editora");
+                                                    livroEdicao.setEditora(scanner.nextLine());
+                                                    do {
+                                                        System.out.println("Número de Páginas");
+                                                        try {
+                                                            livroEdicao.setNumeroDePaginas(scanner.nextInt());
+                                                        } catch (InputMismatchException e) {
+                                                            System.err.println("Número inválido");
+                                                        }
+                                                        scanner.nextLine();
+                                                    } while (livroEdicao.getNumeroDePaginas() == null);
+
+                                                    variavel = 0;
+                                                    do {
+                                                        System.out.println("Formato: 1 - para Brochura, 2 - para CapaDura");
+                                                        try {
+                                                            variavel = scanner.nextInt();
+                                                            livroEdicao.setFormato(Formato.ofFormato(variavel));
+                                                        } catch (InputMismatchException e) {
+                                                            System.err.println("Número inválido");
+                                                        } catch (NoSuchElementException ex) {
+                                                            System.err.println("Número inválido");
+                                                        }
+                                                        scanner.nextLine();
+                                                    } while (variavel != 1 && variavel != 2);
+
+                                                    variavel = 0;
+                                                    do {
+                                                        System.out.println("Informe o Idioma: 1 - para PORTUGUÊS, 2 - para INGLÊS ou 3 - para ESPANHOL");
+                                                        try {
+                                                            variavel = scanner.nextInt();
+                                                            livroEdicao.setIdioma(Idioma.ofIdioma(variavel));
+
+                                                        } catch (InputMismatchException e) {
+                                                            System.err.println("Número inválido");
+                                                        }
+                                                        scanner.nextLine();
+                                                    } while (variavel != 1 && variavel != 2 && variavel != 3);
+
+                                                    livroService.editar(id, livroEdicao);
+
+                                                    break;
+                                                case 3:
+                                                    livroService.listar();
+                                                    break;
+                                                case 4:
+                                                    System.out.println("Informe o livro o qual você deseja excluir ");
+                                                    livroService.listar();
+                                                    boolean validou = false;
+                                                    while (!validou) {
+                                                        try {
+                                                            id = scanner.nextInt();
+                                                            livroService.remover(id);
+                                                            validou = true;
+                                                        } catch (InputMismatchException e) {
+                                                            System.err.println("Registro inválido");
+                                                        }
+                                                    }
+                                                    break;
+                                                case 0:
+                                                    break;
+                                                default:
+                                                    System.err.println("Opção inválida");
+                                                    break;
+                                            }
+                                        } catch (InputMismatchException e) {
+                                            System.err.println("Opção inválida");
+                                        }
+                                    } while (opcao < 0 && opcao > 4);
                                 }
-                            } while (opcao < 0 && opcao > 4);
-
+                            } catch (InputMismatchException e) {
+                                System.err.println("Opção inválida");
+                            }
                             break;
-
                         case 2:
 
                             opcao = -1;
