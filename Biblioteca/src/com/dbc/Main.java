@@ -69,7 +69,7 @@ public class Main {
                                                         System.out.println("Número de Páginas");
                                                         try {
                                                             livro.setNumeroDePaginas(scanner.nextInt());
-                                                        } catch (InputMismatchException e) {
+                                                        } catch (NoSuchElementException ex) {
                                                             System.err.println("Número inválido");
                                                         }
                                                         scanner.nextLine();
@@ -98,6 +98,8 @@ public class Main {
 
                                                         } catch (InputMismatchException e) {
                                                             System.err.println("Número inválido");
+                                                        } catch (NoSuchElementException ex) {
+                                                            System.err.println("Número inválido");
                                                         }
                                                         scanner.nextLine();
                                                     } while (variavel != 1 && variavel != 2 && variavel != 3);
@@ -123,7 +125,7 @@ public class Main {
                                                         System.out.println("Número de Páginas");
                                                         try {
                                                             livroEdicao.setNumeroDePaginas(scanner.nextInt());
-                                                        } catch (InputMismatchException e) {
+                                                        } catch (NoSuchElementException ex) {
                                                             System.err.println("Número inválido");
                                                         }
                                                         scanner.nextLine();
@@ -151,6 +153,8 @@ public class Main {
                                                             livroEdicao.setIdioma(Idioma.ofIdioma(variavel));
 
                                                         } catch (InputMismatchException e) {
+                                                            System.err.println("Número inválido");
+                                                        } catch (NoSuchElementException ex) {
                                                             System.err.println("Número inválido");
                                                         }
                                                         scanner.nextLine();

@@ -25,3 +25,9 @@ L
 src/com/dbc/model/Livro.java,b\5\b5aa14b1501d6e7ec2696d6c964cbdbffdf48dfe
 [
 +src/com/dbc/repository/LivroRepository.java,e\f\efd9c87b8a96b036feeda17b946bd62e0807ad46
+S
+#.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
+>
+Biblioteca.iml,4\c\4c0f0754c651fdf46e610aea22306c689366fd52
+E
+src/com/dbc/Main.java,f\9\f9bbfc36fc7febd171ced3e17c31e1eda69b481d

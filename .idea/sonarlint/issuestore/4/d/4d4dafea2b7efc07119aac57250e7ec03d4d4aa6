@@ -1,0 +1,20 @@
+
+g
+java:S1128"QRemove this unnecessary import: java.lang classes are always implicitly imported.(ú®Ú±
+N	java:S106H"9Replace this use of System.out or System.err by a logger.(ùÎŠ¯
+N	java:S106]"9Replace this use of System.out or System.err by a logger.(ÖÃª
+N	java:S106^"9Replace this use of System.out or System.err by a logger.( ¾÷
+S	java:S106_"9Replace this use of System.out or System.err by a logger.(ş½—Öúÿÿÿÿ
+N	java:S106`"9Replace this use of System.out or System.err by a logger.(”èç©
+N	java:S106a"9Replace this use of System.out or System.err by a logger.(Ê¾˜
+N	java:S106g"9Replace this use of System.out or System.err by a logger.(ŸøšÍ
+S	java:S106j"9Replace this use of System.out or System.err by a logger.(îªíûùÿÿÿÿ
+N	java:S106l"9Replace this use of System.out or System.err by a logger.(ÄØÒŞ
+S	java:S106n"9Replace this use of System.out or System.err by a logger.(ÈÔÁ†şÿÿÿÿ
+N	java:S106v"9Replace this use of System.out or System.err by a logger.(ù´
+S	java:S106|"9Replace this use of System.out or System.err by a logger.(ÛÓÑÍşÿÿÿÿ
+M	java:S106"9Replace this use of System.out or System.err by a logger.(¬Êğ
+T	java:S106"9Replace this use of System.out or System.err by a logger.(±û“¥üÿÿÿÿ
+O	java:S106ƒ"9Replace this use of System.out or System.err by a logger.(÷ßí³
+T	java:S106ˆ"9Replace this use of System.out or System.err by a logger.(ó¬ûïşÿÿÿÿ
+T	java:S106‘"9Replace this use of System.out or System.err by a logger.(äŒ‰ıÿÿÿÿ

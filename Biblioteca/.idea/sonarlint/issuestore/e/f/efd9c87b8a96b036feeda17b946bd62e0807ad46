@@ -1,0 +1,17 @@
+
+H
+java:S6126""2Replace this String concatenation with Text block.(Õ›¿Â
+>
+java:S14811"(Remove this unused "res" local variable.(¼¯’‚
+M	java:S1062"9Replace this use of System.out or System.err by a logger.(Óá•%
+N	java:S106w"9Replace this use of System.out or System.err by a logger.(ÔÏéÚ
+b
+java:S2095"GUse try-with-resources or close this "Statement" in a "finally" clause.(õ½ÛØşÿÿÿÿ
+c
+java:S2095"GUse try-with-resources or close this "Statement" in a "finally" clause.(íñéşÿÿÿÿ
+e
+java:S2095&"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(’ÀÌ‰
+e
+java:S2095l"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(Î»×Ğ
+e
+java:S2095I"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(’ÀÌ‰
